@@ -1,0 +1,274 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[unicode]{hyperref}
+\usepackage{geometry}
+\usepackage{pdflscape}
+\geometry{lmargin=2cm, top=3cm}
+\usepackage{longtable}
+\usepackage{tabularx}
+
+\author{Architektura Systemów Komputerowych}
+\title{Dokumentacja robota typu line follower}
+\date{2013/2014}
+\begin{document}
+
+\vspace{3cm}
+\maketitle
+\vspace{2cm}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{rl}
+  \hline
+  Nazwa robota: & \\
+  & Żubroń - seksmaszyna \\
+  \hline 
+  Członkowie drużyny: & \\
+  programowanie, mechanika, projektowanie PCB & Maciej Sobkowski \\
+  projektowanie PCB, mechanika & Przemysław Hoffmann \\
+  machanika, programowanie, dokumentacja & Szymon Gramza \\
+  mechanika, programowanie, dokumentacja & Damian Michalak \\
+  mechanika, programowanie & Kamil Wygralak \\
+  mechanika, wideo & Adam Szczesiak \\
+  mechanika, wideo & Maciej Królikowski \\
+  \hline
+  Prowadzący: & \\
+  & dr inż Rafał Klaus \\
+  \hline
+\end{tabularx} 
+\end{center} %end czlonkowie
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Wstęp i opis projektu}
+Celem projektu było skonstruowanie robota typu Line Follower i wystartowanie w zawodach RoboDay 2014.
+Zadaniem robota typu Line Follower jest pokonanie trasy wyznaczonej przez czarną linię umieszczoną na jasnej powierzchni. Wykorzystując odpowiednie sensory i działając według zaimplementowanego algorytmu, nie mogą one z niej zjechać.
+Wymagania dotyczące konstrukcji i specyfiki:
+\begin{itemize}
+  \item główny obrys robota musi mieścić się na kartce papieru formatu A4,
+  \item waga robota nie jest ograniczona
+  \item robot musi poruszać się w sposób autonomiczny. Komunikacja z robotem w czasie przejazdu jest zabroniona,
+  \item robot powinien być tak zaprojektowany by można było go uruchomić na znak dany przez sędziego.
+\end{itemize}
+
+\section{Idea rozwiązania}
+\section{Mechanika}
+Rysunki, obliczenia, rozwiązania, problemy, pomysły które odrzucono
+  \subsection{Konstrukcja nośna}
+  Podstawą konstrukcji nośnej i jednocześnie miejscem montażowym elementów elektronicznych jest laminat o wymiarach 100x80mm. 
+  Ścieżki i miejsce przylutowania elementów zostały ulokowane w środkowej części płytki tak, aby możliwe było przymocowanie wszystkich podzespołów.
+  Obie części zostały ze sobą połączone za pomocą szpilek M3 i śrub M3. 
+  W ten sposób otrzymano spójną i sztywną konstrukcję mechaniczną.
+  
+  \textsc{Schemat płyty}
+  
+  \subsection{Układ jezdny}
+  Robot napędzany jest dwoma silnikami firmy Micromotors o ciągłej rotacji (continous rotation) umiejscowionymi z tyłu.  
+  Do silników przymocowano koła plastikowo-gumowe o średnicy 43mmx28mm firmy Lego. 
+  Z przodu zamontowano caster własnej produkcji....
+  Do sterowania prędkością i kierunkiem obrotów silników stosuje się sygnał PWM.
+  Prędkość można regulować dla obu kierunków.
+  Charakterystyka zastosowanych silników:
+  \begin{itemize}
+    \item prędkość kątowa: 60 obr./min.
+    \item moment obrotowy: 3,4 kg/cm
+    \item maks. napięcie zasilania: 6V
+    \item wymiary: 40,5x20x38mm
+    \item waga: 45g
+  \end{itemize}
+  \subsection{Schemat}
+  
+  
+\section{Elektrotechnika}
+\subsection{Zasilanie}
+[natężenie, moc, napięcie, czas pracy
+bez doładowania, waga, stabilizacja, innych danych dotyczących wykonania, problemów któ-
+re rozwiązano, wariantów które odrzucono – dlaczego, ...), 
+  Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V.
+  W układzie występują dwa napięcia:
+  \begin{itemize} 
+  \item 12V - napięcie akumulatora
+  Wykorzystywane jest do zasilania silników poprzez sterowniki silników oraz jest wejściowym napięciem dla przetwornicy impulsowej
+  \item 6V - napięcie zasilania logiki
+  Jest to napięcie wyjściowe otrzymane z przetwornicy impulsowej. 
+  Wykorzystywane jest ono dozasilania logiki układu sterującego, sterowników silników (logika). 
+  \end{itemize}
+  
+  \textsc{schemat bloku zasilania}
+
+\subsection{Silniki}
+(opis konstrukcji, parame-
+trów technicznych, ogólnych zasad sterowania, innych danych dotyczących wykonania, pro-
+blemów które rozwiązano, wariantów które odrzucono – dlaczego
+
+\section{Elektronika}
+
+\subsection{Czujniki}
+(zasada działania, parame-
+try, regulacja czułości, innych danych dotyczących wykonania, problemów które rozwiązano,
+wariantów które odrzucono – dlaczego, ...),
+
+Do wykrywania koloru zastosowałem czujniki CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do Vcc o wartości 47k$\Omega$ . Wyjścia CNY70 dołączone są do pinów PC1-PC5 (ADC1-ADC5) mikrokontrolera.
+  Diody podczerwone połączone są szeregowo z rezystorami ograniczającymi prąd o wartości 330$\Omega$.
+  Stan czujników obrazują niebieskie diody podpięte do pinów PD0-PD4. 
+  Trasa przejazdu robota wyznaczona jest czarną linią, zatem świecenie diody obrazuje wykrycie koloru czarnego.
+  Czujniki rozmieszczone są od siebie w odległości 20mm. Jest to podyktowane standardową szerokością taśmy izolacyjnej (19mm), którą powszechnie stosuje się do wyznaczenia trasy.
+  
+  //JESZCZE COŚ DOPISAĆ
+  
+  \textsc{schemat płytki z czujnikami}
+
+\subsection{Sterowanie silnikami}
+(zasada sterowania, użyte układy i ich opis w tym parametrów, innych danych dotyczących
+wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...)
+
+\subsection{Płytka drukowana} i schematy ideowe i montażowe - zasady rozmieszczenia elementów, szeroko-
+ści ścieżek (masa, zasilanie, ...), trasowanie i trawienie płytki, narzędzia IT wspomagające, in-
+nych danych dotyczących wykonania, problemów które rozwiązano, wariantów które odrzu-
+cono – dlaczego, ...).
+
+\section{Mikrokontroler}
+(dobór – kryteria, analiza narzędzi uruchomieniowych,...), (opis
+wybranego mikrokontrolera, otoczenie mikrokontrolera, innych danych dotyczących wyko-
+nania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).
+  Robotem steruje mikrokontroler ATmega8.
+  Mikrokontroler taktowany jest zewnętrznym oscylatorem kwarcowym o wartości 16MHz. Do pinów PD0-PD4 podpiętych jest 5 niebieskich diod 3mm szeregowo z rezystorami 670$\Omega$ obrazujących stan czujników koloru.
+  
+  \textsc{schemat mikrokontrolera}
+
+\section{Oprogramowanie}
+  \subsection{Algorytm}
+  \subsection{Kod źródłowy}
+//z komentarzami, każda linijka numerowana
+  Program został zaimplementowany w języku C. Piny PB1-PB2 (sygnał PWM dla serwomechanizmów) oraz PD0-PD4 (diody sygnalizujące stan czujników) zostały ustawione jako wyjściowe, natomiast piny PC1-PC5 (ADC1-ADC5, odczyt stanu czujników) oraz pin PB0 (przycisk uruchamiający) jako piny wejściowe. Odczyt czujników koloru polega na odczycie stanów na pinach PC1-PC5 mikrokontrolera.
+  \subsection{Inicjalizacja} (procedury uruchomieniowe, narzędzia i metody, innych danych doty-
+czących wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego,
+...).
+  \subsection{Sterowanie}
+  Jako algorytm sterowania robotem wykorzystano algorytm regulatora PID.
+  \subsection{Pomiar}  
+  
+\section{Serwisowania i konserwacja} (punkty pomiarowe na płytce i w konstrukcji, analiza
+FTA awarii i ich skutków, metody ich usunięcia, innych danych dotyczących wykonania, pro-
+blemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).  
+
+\section{Inżynieria oprogramowania i metodyki prowadzenia projektu}
+  \subsection{Analiza SWOT członków zespołu}
+  
+\newgeometry{rmargin=1cm}
+\newgeometry{lmargin=1cm}
+\newgeometry{top=1cm}
+%\footnotesize
+\vspace{3cm}
+\subsection{Kosztorys}
+%\begin{longtable}{|l|r|r@{.}l|r@{.}l|}
+\begin{longtable}{|l|r|r|r|}
+  \hline
+  Element & Ilość & [PLN]/szt & Suma \\
+  \hline \hline
+  SILNIK & 2 & 5,00 & 10,99\\
+  LISTWA ASS02029Z & 1 & 3,00 & 3,00 \\
+  LISTWA KOŁK. 1x40pin PROSTA r=2,54mm & 1 & 0,70 & 0,70 \\
+  PINHEADER-GNIAZDO 40p PROSTY r=2,54mm & 1 & 1,21 & 1,21 \\
+  KOND. CERAMICZNY 22pF & 10 & 0,08 & 0,80 \\
+  GNIAZDO BH-10S 10pin PROSTE & 50 & 0,01 & 0,50 \\
+  REZ. WĘGL. 0,25W -1K 5\% & 0,1 & 5,01 & 0,50 \\
+  LED 3mm ZIELONA-DYFUZYJNA 50 mcd & 0,01 & 15,01 & 0,15 \\
+  STAB. 7805 5V/1.5A T0220 & 1 & 1,21 & 1,21 \\
+  GNIAZDO DC 5,5/2,1 KĄT. W DRUK-2020 & 1 & 1,00 & 1,00 \\
+  ZŁĄCZE AK500/2 r=5mm TAJWAN-NIEB. & 1 & 0,70 & 0,70 \\
+  JUMPER r=2,54mm ZAMKNĘTY h=6mm & 0,04 & 5,01 & 0,20 \\
+  DŁAWIK 10$\mu$H 160mA 2,5R OSIOWY & 0,10 & 30,00 & 0,30 \\
+  DIODA PROST. 1N4007 1A/1000V & 10 & 0,01 & 0,10 \\
+  LAMINAT JEDNOSTR. 12x21,5mm GR=1,5m & 1 & 5,81 & 5,81 \\
+  TRANSOPTOR & 4 & 2,80 & 11,20 \\
+  ATMEGA8A-PU 8kb-FL 1kb-RAM 512b & 1 & 7,50 & 7,50 \\
+  NADSIARCZAN SODU-B327 100g & 1 & 4,50 & 4,50 \\
+  WIERTŁO 0.8mm & 5 & 1,80 & 9,00 \\
+  WIERTŁO 1.0mm & 2 & 1,00 & 1,00 \\
+  WIERTŁO 1.2mm SARIUS & 3 & 1,00 & 3,00 \\
+  KOND. EL. 4,7$\mu$F/25V 85 C & 10 & 0,05 & 0,50 \\ 
+  KOND. KEX47$\mu$F/25V 105 C & 20 & 0,05 & 1,00 \\
+  KOND. EL. 10$\mu$F/25V 5x11mm 105 C & 15 & 0,05 & 0,75 \\
+  KOND. EL. 100$\mu$F/25V 5x11mm 105 C & 30 & 0,05 & 1,50 \\   
+  KOND. EL. 100$\mu$F/50V 8x12mm 105 C & 40 & 0,10 & 0,40 \\ 
+  KOND. EL. 470$\mu$F/50V 13x25mm & 1 & 0,60 & 0,60 \\ 
+  REZ. WĘGL. 0,25W -75R 5\% & 0,1 & 5,00 & 0,50 \\
+  REZ. WĘGL. 0,25W -330R 5\% & 0,1 & 5,00 & 0,50 \\
+  REZ. WĘGL. 0,25W -470R 5\% & 0,1 & 5,00 & 0,50 \\
+  REZ. WĘGL. 0,25W -1K 5\% & 0,1 & 5,00 & 0,50 \\
+  REZ. WĘGL. 0,25W -2,2K 5\% & 0,1 & 5,00 & 0,50 \\
+  REZ. WĘGL. 0,25W -1K 5\% & 0,1 & 5,00 & 0,50 \\
+  REZ. WĘGL. 0,25W -47K 5\% & 0,1 & 5,00 & 0,50 \\
+  MIKRO/SW 6x6mm h=1,5 & 0,1 & 30,0 & 3,00 \\
+  STAB. 7805 5V/1,5A T0220 & 2 & 1,20 & 2,40 \\
+  KOND. CERAM. 100N/50V/105 r=2,54mm & 0,50 & 10,00 & 0,50 \\
+  DŁAWIK 10$\mu$h 160mA 2,5R OSIOWY & 0,02 & 30,00 & 0,60 \\
+  LAMINAT JEDNOSTR.19x31 1mm EPOXYD & 1 & 9,00 & 9,00 \\
+  SŁUPEK DYST.M3x20mm GWINT Z/W-NIKL. & 4 & 0,75 & 3,00 \\
+  NAKRĘTKA M3 -CYNOWANA & 0,04 & 7,00 & 0,28 \\
+  ŚRUBA M3 GRZYBEK 10mm & 0,40 & 30,00 & 1,20 \\
+  LM 339N DIP14 & 4 & 0,80 & 3,20 \\
+  L298N POWER DRIVER SQL15 & 1 & 11,00 & 11,00 \\
+  RURA TERM. RT 2,4/1,2 & 1 & 0,80 & 0,80 \\
+  L293DNE & 1 & 6,00 & 6,00 \\
+  TULEJKA DYST. DR3 6/25mm PLASTIK & 0,02 & 20,00 & 0,40 \\
+  POTENCJ. OBROT. B10K LINIOWY L=15mm & 1 & 3,00 & 3,00 \\
+  BATERIA 1,5V & 8 & 1,50 & 12,00 \\
+  WYTRAWIACZ & 1 & 4,99 & 4,99 \\
+  KOSZYCZKI NA BATERIE & 2 & 2,00 & 4,00 \\      
+  CZUJNIKI CNY70 & 5 & 2,80 & 14,00 \\ 
+  CZUJNIKI CNY70 & 3 & 4,80 & 14,40 \\ 
+   &  &  &  \\        
+  \hline
+\end{longtable}
+\restoregeometry
+
+\subsection{Czas pracy} – realny wraz z podziałem zadań i współbieżnością z wyko-
+rzystaniem np. wykresów Gantta, problemy z podziałem zadań, problemy z pracą zespołową i
+zarządzania czasem – jakie, ich analiza i kreatywne rozwiązania, innych danych dotyczących
+wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, analizy
+kreatywnej prowadzonego cyklu szkolenia (pomysłu na poprawę ewentualnych wad szkole-
+nia )). Inne elementy narzucone prze prowadzących badania studentów V roku.
+
+\subsection{Narzędzie i elementy}
+Opis narzędzi i elementów użytych przy realizacji projektu.
+\subsection{Narzędzia}
+Lista narzędzi:
+\begin{itemize}
+  \item stacja lutownicza
+  \item multiszlifierka precyzyjna z zestawem wymiennych końcówek
+  \item zestaw śrubokrętów precyzyjnych
+  \item zestaw cążków i kombinerek precyzyjnych
+  \item latarka czołowa
+  \item pistolet do kleju na ciepło
+  \item miernik uniwersalny
+  \item ładowarka do akumulatorków
+  \item płytka prototypowa
+\end{itemize}
+
+Wyżej wymienione narzędzia umożliwiły zamocowanie, unieruchomienie podzespołów na płytkach pcb oraz stworzenie zwartej konstrukcji robota. Ponadto umożliwiły m.in. wiercenie, szlifowanie, matowienie powierzchni, przygotowanie elementów konstrukcyjnych własnej roboty takich jak dystanser przedniego koła w celu wypoziomowania konstrukcji.
+Przednie koło zwane dalej casterem zostało 
+
+\section{Uwagi końcowe} (powtórzenie najistotniejszych wniosków i uwag ze wskazaniem kie-
+runków poprawy konstrukcji robota).
+
+\section{Spisy}
+\subsection{Spis rysunków i tabel} 
+\subsection{Spis zawartości DVD} (DTR w doc, katalogi elementów elektroniki,
+elektrotechniki, mikrokontrolera, zdjęcia dokumentalne, prezentacja PowerPoint – szkole-
+niowa dla szkół średnich, wideoklip (od 3 do 5 min wg podanych zasad, inne materiały które
+grupa uzna za ważne dla rozwoju i poprawy warszatatów), niezbędne kodeki do wideoklipu .
+!!! DTR ma być oddana w okładce plastikowej do której wpina się dziurkowane kartki. Pierw-
+sza strona okładki ma być przezroczysta tak aby bez jakiejkolwiek pracy można było odczytać
+czego teczka dotyczy (widoczna pierwsza strona DTR). Na końcu zamocowany w kopercie pa-
+pierowej DVD (podpisany). 
+
+\section{Literatura}
+Literatura pomocna przy tworzeniu robota.
+
+\end{document}
