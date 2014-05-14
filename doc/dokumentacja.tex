@@ -56,31 +56,27 @@ Wymagania dotyczące konstrukcji i specyfiki:
 \end{itemize}
 
 \section{Idea rozwiązania}
+Stworzony robot spełnia wszystkie warunki dotyczące robotów typu line-follower.
+Autonomiczność robota uzyskano poprzez wgranie programu sterującego na mikrokontroler - Atmega8. 
+Do wykrywania trasy wykorzystano czujniki odbiciowe CNY70, które przesyłają sygnał do komparatorów.
+Następnie komparatory przetwarzają te sygnały i przekierowują je dalej do mikrokontrolera, który analizuje je bezpośrednio zaimplementowanym algorytmem. 
+Mikrokontroler steruje pracą silników za pomocą H-mostka, który dostarcza do nich napięcie 12V.
+Cała logika układu jest zasilana z poziomu regulatora napięcia, który otrzymane na wejściu napięcie 12V zmniejsza, dając na wyjściu 5V. 
+
 \section{Mechanika}
 Rysunki, obliczenia, rozwiązania, problemy, pomysły które odrzucono
+  Głównymi komponentami mechanicznej strony robota są:
   \subsection{Konstrukcja nośna}
-  Podstawą konstrukcji nośnej i jednocześnie miejscem montażowym elementów elektronicznych jest laminat o wymiarach 100x80mm. 
-  Ścieżki i miejsce przylutowania elementów zostały ulokowane w środkowej części płytki tak, aby możliwe było przymocowanie wszystkich podzespołów.
-  Obie części zostały ze sobą połączone za pomocą szpilek M3 i śrub M3. 
-  W ten sposób otrzymano spójną i sztywną konstrukcję mechaniczną.
+  Podstawą konstrukcji nośnej i jednocześnie miejscem montażowym elementów elektronicznych są dwie płytki laminatu jednostronnego o wymiarach odpowiednio: 143x169mm oraz 111x56mm. Większa płytka zwana dalej będzie płytką główną, zaś mniejsza zwana także dalej płytką czujnikową. Płytka czujnikowa została umieszczona z przodu konstrukcji i obniżona względem płytki głównej za pomocą 3 dystanserów (śruby i szpilki M3) o łącznej długości 33mm. Zabieg ten umożliwił umieszczenie czujników odbiciowych w optymalnej odległości od podłoża 2-3mm.
+  Ścieżki i miejsce przylutowania elementów płytki głównej zostały ulokowane w środkowej części tak, aby możliwe było wygodne przymocowanie wszystkich podzespołów. 
+  W wyniku wykonania powyższych czynności otrzymano spójną i sztywną konstrukcję mechaniczną.
   
-  \textsc{Schemat płyty}
+  \textsc{Schemat konstrukcji}
   
   \subsection{Układ jezdny}
-  Robot napędzany jest dwoma silnikami firmy Micromotors o ciągłej rotacji (continous rotation) umiejscowionymi z tyłu.  
-  Do silników przymocowano koła plastikowo-gumowe o średnicy 43mmx28mm firmy Lego. 
-  Z przodu zamontowano caster własnej produkcji....
-  Do sterowania prędkością i kierunkiem obrotów silników stosuje się sygnał PWM.
-  Prędkość można regulować dla obu kierunków.
-  Charakterystyka zastosowanych silników:
-  \begin{itemize}
-    \item prędkość kątowa: 60 obr./min.
-    \item moment obrotowy: 3,4 kg/cm
-    \item maks. napięcie zasilania: 6V
-    \item wymiary: 40,5x20x38mm
-    \item waga: 45g
-  \end{itemize}
-  \subsection{Schemat}
+  Układ jezdny tworzą silniki na których zamocowano plastikowo-gumowe koła pochodzące z zestawu klocków LEGO o wymiarach 43x28mm.
+  Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników.
+  Dodatkowym elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. 
   
   
 \section{Elektrotechnika}
@@ -104,6 +100,21 @@ re rozwiązano, wariantów które odrzucono – dlaczego, ...),
 (opis konstrukcji, parame-
 trów technicznych, ogólnych zasad sterowania, innych danych dotyczących wykonania, pro-
 blemów które rozwiązano, wariantów które odrzucono – dlaczego
+Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producenta HL 149.6.10 AS.
+  Silniki pracują w trybie ciągłej rotacji (continous rotation), w opisanej konfiguracji umieszczono je w tylnej części konstrukcji. 
+  Z przodu zamontowano caster własnej produkcji....
+  Do sterowania prędkością i kierunkiem obrotów silników stosuje się sygnał PWM.
+  Prędkość można regulować dla obu kierunków.
+  Charakterystyka zastosowanych silników:
+  \begin{itemize}
+    \item prędkość kątowa: 60 obr./min.
+    \item moment obrotowy: 3,4 kg/cm
+    \item napięcie zasilania: 6V DC
+    \item wymiary: 40,5x20x38mm
+    \item waga: 45g
+  \end{itemize}
+ 
+  \textsc{Schemat konstrukcji}
 
 \section{Elektronika}
 
