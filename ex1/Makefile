@@ -1,5 +1,5 @@
-PRG            = demo1
-OBJ            = demo1.o
+PRG            = ex1
+OBJ            = ex1.o
 #MCU_TARGET     = at90s2313
 #MCU_TARGET     = at90s2333
 #MCU_TARGET     = at90s4414
