@@ -29,3 +29,10 @@
 *.docx
 *.pdf
 *~
+*.bin
+*.hex
+*.elf
+*.srec
+*.lst
+*.map
+*.o
