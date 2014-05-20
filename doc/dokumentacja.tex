@@ -13,6 +13,7 @@
 \author{Architektura Systemów Komputerowych}
 \title{Dokumentacja robota typu line follower}
 \date{2013/2014}
+\listfiles
 \begin{document}
 
 \vspace{3cm}
@@ -26,13 +27,13 @@
   & Żubroń - seksmaszyna \\
   \hline 
   Członkowie drużyny: & \\
-  programowanie, mechanika, projektowanie PCB & Maciej Sobkowski \\
-  projektowanie PCB, mechanika & Przemysław Hoffmann \\
   machanika, programowanie, dokumentacja & Szymon Gramza \\
-  mechanika, programowanie, dokumentacja & Damian Michalak \\
-  mechanika, programowanie & Kamil Wygralak \\
-  mechanika, wideo & Adam Szczesiak \\
+  mechanika, projektowanie PCB & Przemysław Hoffmann \\
   mechanika, wideo & Maciej Królikowski \\
+  mechanika, programowanie, dokumentacja & Damian Michalak \\
+  mechanika, programowanie, projektowanie PCB & Maciej Sobkowski \\
+  mechanika, wideo & Adam Szczesiak \\
+  mechanika, programowanie & Kamil Wygralak \\
   \hline
   Prowadzący: & \\
   & dr inż Rafał Klaus \\
@@ -47,14 +48,20 @@
 \section{Wstęp i opis projektu}
 Celem projektu było skonstruowanie robota typu Line Follower i wystartowanie w zawodach RoboDay 2014.
 Zadaniem robota typu Line Follower jest pokonanie trasy wyznaczonej przez czarną linię umieszczoną na jasnej powierzchni. Wykorzystując odpowiednie sensory i działając według zaimplementowanego algorytmu, nie mogą one z niej zjechać.
-Wymagania dotyczące konstrukcji i specyfiki:
+\newline Wymagania dotyczące konstrukcji i specyfiki:
 \begin{itemize}
-  \item główny obrys robota musi mieścić się na kartce papieru formatu A4,
+  \item Główny obrys robota musi mieścić się na kartce papieru formatu A4,
   \item waga robota nie jest ograniczona
   \item robot musi poruszać się w sposób autonomiczny. Komunikacja z robotem w czasie przejazdu jest zabroniona,
   \item robot powinien być tak zaprojektowany by można było go uruchomić na znak dany przez sędziego.
 \end{itemize}
-
+Wymagania dotyczące trasy:
+\begin{itemize}
+  \item Trasa składać się będzie z białej powierzchni i czarnej linii o szerokości 19$\pm$ 1 mm,
+  \item kąt zakrętu o promieniu 0 to maksymalnie 90 stopni,
+  \item minimalna odległość między dwiema równoległymi liniami to 210mm,
+  \item minimalna odległość między krawędziami planszy a torem to 210mm.
+\end{itemize}
 \section{Idea rozwiązania}
 Stworzony robot spełnia wszystkie warunki dotyczące robotów typu line-follower.
 Autonomiczność robota uzyskano poprzez wgranie programu sterującego na mikrokontroler - Atmega8. 
@@ -75,25 +82,34 @@ Rysunki, obliczenia, rozwiązania, problemy, pomysły które odrzucono
   
   \subsection{Układ jezdny}
   Układ jezdny tworzą silniki na których zamocowano plastikowo-gumowe koła pochodzące z zestawu klocków LEGO o wymiarach 43x28mm.
-  Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników.
-  Dodatkowym elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. 
+  Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blachy o wymiarach 30x60mm. Po zagęciu wykonano nawiercono otwory montownicze.
+  Dodatkowym elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii.
   
   
 \section{Elektrotechnika}
 \subsection{Zasilanie}
+Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V połączonych szeregowo co daje napięcie 12V.
+ W układzie występują trzy napięcia:
+  \begin{itemize} 
+  \item 12V - napięcie silników
+  Podawane na H-mostek bezpośrednio z wyjścia baterii.
+  Wykorzystywane jest do zasilania silników poprzez sterownik silników.
+  \item 5V - napięcie zasilania logiki
+  Jest to napięcie wyjściowe otrzymane z regulatora napięcia LM7805, który z wejściowego napięcia 12V daje na wyjściu 5V.
+  Wykorzystywane jest ono do zasilania układów logicznych mikrokontrolera, H-mostka i komparatorów oraz do zasilania diód w transoptorach.
+  \item 0-5V - regulowane potencjometrem
+  Wejściowym napięciem dla potencjometru jest 5V. Jest ono wykorzystywane do regulowania napięcia progowego, używanego do sterowania czułością transoptorów.
+  \end{itemize}
+
+  Długość pracy robota przy zastosowanym zasilaniu to około 2h???
+
+Inne: odrzucono wariant dodania histerezy (w celu uniknięcia wielu zmian stanów 0->1 i 1->0 spowodowane podobnym co do wartości napięciom wejściowym komparatora pochodzących z transoptorów oraz potencjometru) z powodu konieczności tworzenia dwustronnej płytki co jest trudne do wykonania.
+Rozwiązano problem przegrzewania się stabilizatora prze zamocowanie przy nim radiatora oraz przez użycie rezystorów o większym oporze przy diodach CNY70.
+
 [natężenie, moc, napięcie, czas pracy
 bez doładowania, waga, stabilizacja, innych danych dotyczących wykonania, problemów któ-
 re rozwiązano, wariantów które odrzucono – dlaczego, ...), 
-  Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V.
-  W układzie występują dwa napięcia:
-  \begin{itemize} 
-  \item 12V - napięcie akumulatora
-  Wykorzystywane jest do zasilania silników poprzez sterowniki silników oraz jest wejściowym napięciem dla przetwornicy impulsowej
-  \item 6V - napięcie zasilania logiki
-  Jest to napięcie wyjściowe otrzymane z przetwornicy impulsowej. 
-  Wykorzystywane jest ono dozasilania logiki układu sterującego, sterowników silników (logika). 
-  \end{itemize}
-  
+    
   \textsc{schemat bloku zasilania}
 
 \subsection{Silniki}
@@ -102,14 +118,12 @@ trów technicznych, ogólnych zasad sterowania, innych danych dotyczących wykon
 blemów które rozwiązano, wariantów które odrzucono – dlaczego
 Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producenta HL 149.6.10 AS.
   Silniki pracują w trybie ciągłej rotacji (continous rotation), w opisanej konfiguracji umieszczono je w tylnej części konstrukcji. 
-  Z przodu zamontowano caster własnej produkcji....
-  Do sterowania prędkością i kierunkiem obrotów silników stosuje się sygnał PWM.
-  Prędkość można regulować dla obu kierunków.
+  Do sterowania prędkością i kierunkiem obrotów silników stosuje się sygnał PWM. Prędkość można regulować dla obu kierunków.
   Charakterystyka zastosowanych silników:
   \begin{itemize}
     \item prędkość kątowa: 60 obr./min.
     \item moment obrotowy: 3,4 kg/cm
-    \item napięcie zasilania: 6V DC
+    \item napięcie zasilania: 12V DC
     \item wymiary: 40,5x20x38mm
     \item waga: 45g
   \end{itemize}
@@ -123,7 +137,7 @@ Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producen
 try, regulacja czułości, innych danych dotyczących wykonania, problemów które rozwiązano,
 wariantów które odrzucono – dlaczego, ...),
 
-Do wykrywania koloru zastosowałem czujniki CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do Vcc o wartości 47k$\Omega$ . Wyjścia CNY70 dołączone są do pinów PC1-PC5 (ADC1-ADC5) mikrokontrolera.
+Do wykrywania koloru zastosowano czujniki CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do Vcc o wartości 47k$\Omega$ . Wyjścia CNY70 dołączone są do pinów PC1-PC5 (ADC1-ADC5) mikrokontrolera.
   Diody podczerwone połączone są szeregowo z rezystorami ograniczającymi prąd o wartości 330$\Omega$.
   Stan czujników obrazują niebieskie diody podpięte do pinów PD0-PD4. 
   Trasa przejazdu robota wyznaczona jest czarną linią, zatem świecenie diody obrazuje wykrycie koloru czarnego.
@@ -134,6 +148,7 @@ Do wykrywania koloru zastosowałem czujniki CNY70 – układ diody podczerwonej 
   \textsc{schemat płytki z czujnikami}
 
 \subsection{Sterowanie silnikami}
+Do sterowania pracą silników użyto regulator napięcia, który
 (zasada sterowania, użyte układy i ich opis w tym parametrów, innych danych dotyczących
 wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...)
 
@@ -265,7 +280,9 @@ Lista narzędzi:
 Wyżej wymienione narzędzia umożliwiły zamocowanie, unieruchomienie podzespołów na płytkach pcb oraz stworzenie zwartej konstrukcji robota. Ponadto umożliwiły m.in. wiercenie, szlifowanie, matowienie powierzchni, przygotowanie elementów konstrukcyjnych własnej roboty takich jak dystanser przedniego koła w celu wypoziomowania konstrukcji.
 Przednie koło zwane dalej casterem zostało 
 
-\section{Uwagi końcowe} (powtórzenie najistotniejszych wniosków i uwag ze wskazaniem kie-
+\section{Uwagi końcowe}
+
+ (powtórzenie najistotniejszych wniosków i uwag ze wskazaniem kie-
 runków poprawy konstrukcji robota).
 
 \section{Spisy}
