@@ -25,7 +25,7 @@ int weitgts[] = {
 
 int kp = 21;
 int ki = 0;
-int kd = 1;
+int kd = 5;
 int target = 0;
 int tp = START_PWM;
 
