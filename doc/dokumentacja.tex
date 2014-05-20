@@ -130,7 +130,7 @@ Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producen
 try, regulacja czułości, innych danych dotyczących wykonania, problemów które rozwiązano,
 wariantów które odrzucono – dlaczego, ...),
 
-Do wykrywania koloru zastosowałem czujniki CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do Vcc o wartości 47k$\Omega$ . Wyjścia CNY70 dołączone są do pinów PC1-PC5 (ADC1-ADC5) mikrokontrolera.
+Do wykrywania koloru zastosowano czujniki CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do Vcc o wartości 47k$\Omega$ . Wyjścia CNY70 dołączone są do pinów PC1-PC5 (ADC1-ADC5) mikrokontrolera.
   Diody podczerwone połączone są szeregowo z rezystorami ograniczającymi prąd o wartości 330$\Omega$.
   Stan czujników obrazują niebieskie diody podpięte do pinów PD0-PD4. 
   Trasa przejazdu robota wyznaczona jest czarną linią, zatem świecenie diody obrazuje wykrycie koloru czarnego.
@@ -141,6 +141,7 @@ Do wykrywania koloru zastosowałem czujniki CNY70 – układ diody podczerwonej 
   \textsc{schemat płytki z czujnikami}
 
 \subsection{Sterowanie silnikami}
+Do sterowania pracą silników użyto regulator napięcia, który
 (zasada sterowania, użyte układy i ich opis w tym parametrów, innych danych dotyczących
 wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...)
 
@@ -272,7 +273,9 @@ Lista narzędzi:
 Wyżej wymienione narzędzia umożliwiły zamocowanie, unieruchomienie podzespołów na płytkach pcb oraz stworzenie zwartej konstrukcji robota. Ponadto umożliwiły m.in. wiercenie, szlifowanie, matowienie powierzchni, przygotowanie elementów konstrukcyjnych własnej roboty takich jak dystanser przedniego koła w celu wypoziomowania konstrukcji.
 Przednie koło zwane dalej casterem zostało 
 
-\section{Uwagi końcowe} (powtórzenie najistotniejszych wniosków i uwag ze wskazaniem kie-
+\section{Uwagi końcowe}
+
+ (powtórzenie najistotniejszych wniosków i uwag ze wskazaniem kie-
 runków poprawy konstrukcji robota).
 
 \section{Spisy}
