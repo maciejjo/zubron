@@ -4,7 +4,7 @@
 
 #define SENSORS 7
 #define MAX_PWM 255
-#define START_PWM 180
+#define START_PWM 128
 #define MAX_ERR 6
 
 void setup_motors();
@@ -23,9 +23,9 @@ int sensors[] = {
 int weitgts[] = {
   -3, -2, -1, 0, 1, 2, 3 };
 
-int kp = 12;
-int ki = 1;
-int kd = 2;
+int kp = 21;
+int ki = 0;
+int kd = 1;
 int target = 0;
 int tp = START_PWM;
 
@@ -78,7 +78,7 @@ int main()
       OCR1A = right;
       OCR1B = left;
 
-      _delay_ms(10);
+      _delay_ms(5);
 
     }
 
