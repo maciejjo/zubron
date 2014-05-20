@@ -13,6 +13,7 @@
 \author{Architektura Systemów Komputerowych}
 \title{Dokumentacja robota typu line follower}
 \date{2013/2014}
+\listfiles
 \begin{document}
 
 \vspace{3cm}
@@ -26,13 +27,13 @@
   & Żubroń - seksmaszyna \\
   \hline 
   Członkowie drużyny: & \\
-  programowanie, mechanika, projektowanie PCB & Maciej Sobkowski \\
-  projektowanie PCB, mechanika & Przemysław Hoffmann \\
   machanika, programowanie, dokumentacja & Szymon Gramza \\
-  mechanika, programowanie, dokumentacja & Damian Michalak \\
-  mechanika, programowanie & Kamil Wygralak \\
-  mechanika, wideo & Adam Szczesiak \\
+  mechanika, projektowanie PCB & Przemysław Hoffmann \\
   mechanika, wideo & Maciej Królikowski \\
+  mechanika, programowanie, dokumentacja & Damian Michalak \\
+  mechanika, programowanie, projektowanie PCB & Maciej Sobkowski \\
+  mechanika, wideo & Adam Szczesiak \\
+  mechanika, programowanie & Kamil Wygralak \\
   \hline
   Prowadzący: & \\
   & dr inż Rafał Klaus \\
@@ -47,14 +48,20 @@
 \section{Wstęp i opis projektu}
 Celem projektu było skonstruowanie robota typu Line Follower i wystartowanie w zawodach RoboDay 2014.
 Zadaniem robota typu Line Follower jest pokonanie trasy wyznaczonej przez czarną linię umieszczoną na jasnej powierzchni. Wykorzystując odpowiednie sensory i działając według zaimplementowanego algorytmu, nie mogą one z niej zjechać.
-Wymagania dotyczące konstrukcji i specyfiki:
+\newline Wymagania dotyczące konstrukcji i specyfiki:
 \begin{itemize}
-  \item główny obrys robota musi mieścić się na kartce papieru formatu A4,
+  \item Główny obrys robota musi mieścić się na kartce papieru formatu A4,
   \item waga robota nie jest ograniczona
   \item robot musi poruszać się w sposób autonomiczny. Komunikacja z robotem w czasie przejazdu jest zabroniona,
   \item robot powinien być tak zaprojektowany by można było go uruchomić na znak dany przez sędziego.
 \end{itemize}
-
+Wymagania dotyczące trasy:
+\begin{itemize}
+  \item Trasa składać się będzie z białej powierzchni i czarnej linii o szerokości 19$\pm$ 1 mm,
+  \item kąt zakrętu o promieniu 0 to maksymalnie 90 stopni,
+  \item minimalna odległość między dwiema równoległymi liniami to 210mm,
+  \item minimalna odległość między krawędziami planszy a torem to 210mm.
+\end{itemize}
 \section{Idea rozwiązania}
 Stworzony robot spełnia wszystkie warunki dotyczące robotów typu line-follower.
 Autonomiczność robota uzyskano poprzez wgranie programu sterującego na mikrokontroler - Atmega8. 
