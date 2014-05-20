@@ -82,25 +82,34 @@ Rysunki, obliczenia, rozwiązania, problemy, pomysły które odrzucono
   
   \subsection{Układ jezdny}
   Układ jezdny tworzą silniki na których zamocowano plastikowo-gumowe koła pochodzące z zestawu klocków LEGO o wymiarach 43x28mm.
-  Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników.
-  Dodatkowym elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. 
+  Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blachy o wymiarach 30x60mm. Po zagęciu wykonano nawiercono otwory montownicze.
+  Dodatkowym elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii.
   
   
 \section{Elektrotechnika}
 \subsection{Zasilanie}
+Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V połączonych szeregowo co daje napięcie 12V.
+ W układzie występują trzy napięcia:
+  \begin{itemize} 
+  \item 12V - napięcie silników
+  Podawane na H-mostek bezpośrednio z wyjścia baterii.
+  Wykorzystywane jest do zasilania silników poprzez sterownik silników.
+  \item 5V - napięcie zasilania logiki
+  Jest to napięcie wyjściowe otrzymane z regulatora napięcia LM7805, który z wejściowego napięcia 12V daje na wyjściu 5V.
+  Wykorzystywane jest ono do zasilania układów logicznych mikrokontrolera, H-mostka i komparatorów oraz do zasilania diód w transoptorach.
+  \item 0-5V - regulowane potencjometrem
+  Wejściowym napięciem dla potencjometru jest 5V. Jest ono wykorzystywane do regulowania napięcia progowego, używanego do sterowania czułością transoptorów.
+  \end{itemize}
+
+  Długość pracy robota przy zastosowanym zasilaniu to około 2h???
+
+Inne: odrzucono wariant dodania histerezy (w celu uniknięcia wielu zmian stanów 0->1 i 1->0 spowodowane podobnym co do wartości napięciom wejściowym komparatora pochodzących z transoptorów oraz potencjometru) z powodu konieczności tworzenia dwustronnej płytki co jest trudne do wykonania.
+Rozwiązano problem przegrzewania się stabilizatora prze zamocowanie przy nim radiatora oraz przez użycie rezystorów o większym oporze przy diodach CNY70.
+
 [natężenie, moc, napięcie, czas pracy
 bez doładowania, waga, stabilizacja, innych danych dotyczących wykonania, problemów któ-
 re rozwiązano, wariantów które odrzucono – dlaczego, ...), 
-  Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V.
-  W układzie występują dwa napięcia:
-  \begin{itemize} 
-  \item 12V - napięcie akumulatora
-  Wykorzystywane jest do zasilania silników poprzez sterowniki silników oraz jest wejściowym napięciem dla przetwornicy impulsowej
-  \item 6V - napięcie zasilania logiki
-  Jest to napięcie wyjściowe otrzymane z przetwornicy impulsowej. 
-  Wykorzystywane jest ono dozasilania logiki układu sterującego, sterowników silników (logika). 
-  \end{itemize}
-  
+    
   \textsc{schemat bloku zasilania}
 
 \subsection{Silniki}
@@ -109,14 +118,12 @@ trów technicznych, ogólnych zasad sterowania, innych danych dotyczących wykon
 blemów które rozwiązano, wariantów które odrzucono – dlaczego
 Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producenta HL 149.6.10 AS.
   Silniki pracują w trybie ciągłej rotacji (continous rotation), w opisanej konfiguracji umieszczono je w tylnej części konstrukcji. 
-  Z przodu zamontowano caster własnej produkcji....
-  Do sterowania prędkością i kierunkiem obrotów silników stosuje się sygnał PWM.
-  Prędkość można regulować dla obu kierunków.
+  Do sterowania prędkością i kierunkiem obrotów silników stosuje się sygnał PWM. Prędkość można regulować dla obu kierunków.
   Charakterystyka zastosowanych silników:
   \begin{itemize}
     \item prędkość kątowa: 60 obr./min.
     \item moment obrotowy: 3,4 kg/cm
-    \item napięcie zasilania: 6V DC
+    \item napięcie zasilania: 12V DC
     \item wymiary: 40,5x20x38mm
     \item waga: 45g
   \end{itemize}
