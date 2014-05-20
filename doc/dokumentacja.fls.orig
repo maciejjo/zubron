@@ -1,11 +1,4 @@
 <<<<<<< HEAD
-PWD /home/przemek/zubron/doc
-INPUT /etc/texmf/web2c/texmf.cnf
-INPUT /usr/share/texmf/web2c/texmf.cnf
-INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
-INPUT /var/lib/texmf/web2c/pdftex/latex.fmt
-=======
-<<<<<<< HEAD
 PWD /home/maciejjo/code/avr/zubron/doc
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/latex.fmt
@@ -100,7 +93,6 @@ INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
->>>>>>> 20896993465f349dc094377f1c4ac48d96f196a9
 INPUT dokumentacja.tex
 OUTPUT dokumentacja.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -136,17 +128,12 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
-<<<<<<< HEAD
-INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
-INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
-=======
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
->>>>>>> 20896993465f349dc094377f1c4ac48d96f196a9
 INPUT /usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -170,15 +157,8 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/url/url.sty
-<<<<<<< HEAD
-INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hdvips.def
-INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hdvips.def
-INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/pdfmark.def
-INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/pdfmark.def
-=======
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
->>>>>>> 20896993465f349dc094377f1c4ac48d96f196a9
 INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
@@ -196,8 +176,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 INPUT dokumentacja.aux
 INPUT dokumentacja.aux
 OUTPUT dokumentacja.aux
-<<<<<<< HEAD
-=======
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
@@ -206,21 +184,15 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
->>>>>>> 20896993465f349dc094377f1c4ac48d96f196a9
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-<<<<<<< HEAD
-=======
 >>>>>>> 37ed709860abd0098fc897bc477ade5e1046f18b
->>>>>>> 20896993465f349dc094377f1c4ac48d96f196a9
 INPUT dokumentacja.out
 INPUT dokumentacja.out
 INPUT dokumentacja.out
 INPUT dokumentacja.out
-<<<<<<< HEAD
-=======
 <<<<<<< HEAD
 INPUT ./dokumentacja.out
 INPUT ./dokumentacja.out
@@ -261,7 +233,6 @@ INPUT ./dokumentacja.out
 INPUT ./dokumentacja.out
 =======
 OUTPUT dokumentacja.pdf
->>>>>>> 20896993465f349dc094377f1c4ac48d96f196a9
 INPUT ./dokumentacja.out
 INPUT ./dokumentacja.out
 OUTPUT dokumentacja.out
@@ -284,11 +255,7 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/polski/omxplex.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pl/plex10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pl/plmi10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pl/plsy10.tfm
-<<<<<<< HEAD
-OUTPUT dokumentacja.dvi
-=======
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
->>>>>>> 20896993465f349dc094377f1c4ac48d96f196a9
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pl/plr12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pl/plbx12.tfm
 INPUT dokumentacja.toc
@@ -303,8 +270,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/pl/plcsc10.tfm
 INPUT dokumentacja.aux
 INPUT ./dokumentacja.out
 INPUT ./dokumentacja.out
-<<<<<<< HEAD
-=======
 INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plsc.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plms.enc
@@ -319,4 +284,3 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr17.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.pfb
 >>>>>>> 37ed709860abd0098fc897bc477ade5e1046f18b
->>>>>>> 20896993465f349dc094377f1c4ac48d96f196a9
