@@ -13,11 +13,10 @@ int sensors[] = {
 
 int main()
 {
-  DDRB |= _BV(PB0);
-  DDRD = 0x00;
+  DDRB |= _BV(PB0); // Dioda na wyjście
+  DDRD = 0x00; // Port D na wejścia (czujniki)
 
   setup_motors();
-
 
   while(1) {
     if(PIND & _BV(PD0))
@@ -53,30 +52,29 @@ void setup_motors() {
 
 void motors_left() {
 
-  PORTC &= ~_BV(PC0);
-  PORTC |= _BV(PC1);
+  PORTC |= _BV(PC0);
+  PORTC |= _BV(PC3);
 
-  PORTC &= ~_BV(PC3);
+  PORTC &= ~_BV(PC1);
   PORTC &= ~_BV(PC2);
-
 
 }
 
 void motors_right() {
 
-  PORTC &= ~_BV(PC0);
-  PORTC &= ~_BV(PC1);
+  PORTC |= _BV(PC0);
+  PORTC |= _BV(PC2);
 
-  PORTC &= ~_BV(PC2);
-  PORTC |= _BV(PC3);
+  PORTC &= ~_BV(PC1);
+  PORTC &= ~_BV(PC3);
 }
 
 void motors_straight() {
 
-  PORTC &= ~_BV(PC0);
-  PORTC |= _BV(PC1);
+  PORTC |= _BV(PC0);
+  PORTC |= _BV(PC2);
 
-  PORTC &= ~_BV(PC2);
-  PORTC |= _BV(PC3);
+  PORTC &= ~_BV(PC1);
+  PORTC &= ~_BV(PC3);
 
 }
