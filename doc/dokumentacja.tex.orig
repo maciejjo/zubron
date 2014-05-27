@@ -79,12 +79,21 @@ Logika układu jest zasilana z poziomu regulatora napięcia, który otrzymane na
   \textsc{Schemat konstrukcji}
   Początkowy projekt zakładał jedną płytkę montażową do której planowano zamocować za pomocą dystanserów płytki z układami logicznymi, jednak odrzucono ten pomysł mając na uwadze zmniejszenie całkowitej wagi robota. Zastosowany schemat konstrukcji pozwolił na łatwy dostęp do elementów, głównie do mikroprocesora, co było przydatne podczas programowania. Ponadto utrzymano transparentność oraz ułatwiono ewentualną wymianę podzespołów w przypadku awarii.
   \subsection{Układ jezdny}
+<<<<<<< HEAD
+  Układ jezdny tworzą silniki na których zamocowano plastikowo-gumowe koła o wymiarach 43x28mm pochodzące z zestawu klocków LEGO.
+  Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blaszki aluminiowej o wymiarach 30x60mm. Po zagęciu nawiercono otwory montownicze.
+  Dodatkowym elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii.
+  \textsc{Fotka kółek}
+  Odrzucono koncepcję 4-kołowego robota z osią skretną ze względu na utrudnienia mechaniczne, zwiększenie kosztów i awaryjność oraz trudniejsze usuwanie usterek.
+=======
   Układ jezdny składa się z części napędowej i mechanicznej. Część napędową tworzą dwa silniki 12V. Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blachy o wymiarach 30x60mm. Po zagęciu wykonano nawiercono otwory montownicze.
   
   Część mechaniczna składa się z dwóch elementów. Pierwszy są plastikowo-gumowe koła o wymiarach 43x28mm, pochodzące z zestawu klocków LEGO. Koła są zamontowane na silnikach za pomocą kleju na ciepło.
   
 Drugim elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii.
-
+  
+  
+>>>>>>> 483885485625e118a8aa18b41953098ff4963b95
 \section{Elektrotechnika}
 \subsection{Zasilanie}
 Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V połączonych szeregowo co daje napięcie 12V.
