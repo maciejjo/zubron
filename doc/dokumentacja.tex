@@ -71,21 +71,19 @@ Mikrokontroler steruje pracą silników za pomocą H-mostka, który dostarcza do
 Cała logika układu jest zasilana z poziomu regulatora napięcia, który otrzymane na wejściu napięcie 12V zmniejsza, dając na wyjściu 5V. 
 
 \section{Mechanika}
-Rysunki, obliczenia, rozwiązania, problemy, pomysły które odrzucono
   Głównymi komponentami mechanicznej strony robota są:
   \subsection{Konstrukcja nośna}
   Podstawą konstrukcji nośnej i jednocześnie miejscem montażowym elementów elektronicznych są dwie płytki laminatu jednostronnego o wymiarach odpowiednio: 143x169mm oraz 111x56mm. Większa płytka zwana dalej będzie płytką główną, zaś mniejsza zwana także dalej płytką czujnikową. Płytka czujnikowa została umieszczona z przodu konstrukcji i obniżona względem płytki głównej za pomocą 3 dystanserów (śruby i szpilki M3) o łącznej długości 33mm. Zabieg ten umożliwił umieszczenie czujników odbiciowych w optymalnej odległości od podłoża 2-3mm.
   Ścieżki i miejsce przylutowania elementów płytki głównej zostały ulokowane w środkowej części tak, aby możliwe było wygodne przymocowanie wszystkich podzespołów. 
   W wyniku wykonania powyższych czynności otrzymano spójną i sztywną konstrukcję mechaniczną.
-  
   \textsc{Schemat konstrukcji}
-  
+  Początkowy projekt zakładał jedną płytkę montażową do której planowano zamocować za pomocą dystanserów płytki z układami logicznymi, jednak odrzucono ten pomysł mając na uwadze zmniejszenie całkowitej wagi robota. Zastosowany schemat konstrukcji pozwolił na łatwy dostęp do elementów, głównie do mikroprocesora, co było przydatne podczas programowania. Ponadto utrzymano transparentność oraz ułatwiono ewentualną wymianę podzespołów w przypadku awarii.
   \subsection{Układ jezdny}
-  Układ jezdny tworzą silniki na których zamocowano plastikowo-gumowe koła pochodzące z zestawu klocków LEGO o wymiarach 43x28mm.
-  Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blachy o wymiarach 30x60mm. Po zagęciu wykonano nawiercono otwory montownicze.
+  Układ jezdny tworzą silniki na których zamocowano plastikowo-gumowe koła o wymiarach 43x28mm pochodzące z zestawu klocków LEGO.
+  Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blaszki aluminiowej o wymiarach 30x60mm. Po zagęciu nawiercono otwory montownicze.
   Dodatkowym elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii.
-  
-  
+  \textsc{Fotka kółek}
+  Odrzucono koncepcję 4-kołowego robota z osią skretną ze względu na utrudnienia mechaniczne, zwiększenie kosztów i awaryjność oraz trudniejsze usuwanie usterek.
 \section{Elektrotechnika}
 \subsection{Zasilanie}
 Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V połączonych szeregowo co daje napięcie 12V.
@@ -100,8 +98,7 @@ Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V połącz
   \item 0-5V - regulowane potencjometrem
   Wejściowym napięciem dla potencjometru jest 5V. Jest ono wykorzystywane do regulowania napięcia progowego, używanego do sterowania czułością transoptorów.
   \end{itemize}
-
-  Długość pracy robota przy zastosowanym zasilaniu to około 2h???
+  Nie mierzono dokładnego czasu pracy robota na bateriach jednak szacuje się, że wynosi on około 2h.
 
 Inne: odrzucono wariant dodania histerezy (w celu uniknięcia wielu zmian stanów 0->1 i 1->0 spowodowane podobnym co do wartości napięciom wejściowym komparatora pochodzących z transoptorów oraz potencjometru) z powodu konieczności tworzenia dwustronnej płytki co jest trudne do wykonania.
 Rozwiązano problem przegrzewania się stabilizatora prze zamocowanie przy nim radiatora oraz przez użycie rezystorów o większym oporze przy diodach CNY70.
@@ -127,6 +124,8 @@ Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producen
     \item wymiary: 40,5x20x38mm
     \item waga: 45g
   \end{itemize}
+ Wybór tych silników był motywowany brakiem konieczności stosowania dodatkowej przekładni gdyż mają wysoki moment obrotowy.
+ Dodatkowym czynnikiem była niska cena silników, jednak główną motywacją był wysoki współczynnik jakości do ceny.
  
   \textsc{Schemat konstrukcji}
 
@@ -137,7 +136,9 @@ Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producen
 try, regulacja czułości, innych danych dotyczących wykonania, problemów które rozwiązano,
 wariantów które odrzucono – dlaczego, ...),
 
-Do wykrywania koloru zastosowano czujniki CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do Vcc o wartości 47k$\Omega$ . Wyjścia CNY70 dołączone są do pinów PC1-PC5 (ADC1-ADC5) mikrokontrolera.
+Do wykrywania koloru zastosowano czujniki CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. 
+Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do Vcc o wartości 47k$\Omega$. 
+Wyjścia CNY70 dołączone są do pinów PC1-PC5 (ADC1-ADC5) mikrokontrolera.
   Diody podczerwone połączone są szeregowo z rezystorami ograniczającymi prąd o wartości 330$\Omega$.
   Stan czujników obrazują niebieskie diody podpięte do pinów PD0-PD4. 
   Trasa przejazdu robota wyznaczona jest czarną linią, zatem świecenie diody obrazuje wykrycie koloru czarnego.
