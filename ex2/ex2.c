@@ -3,9 +3,7 @@
 #include <util/delay.h>
 
 #define SENSORS 7
-#define MAX_PWM 255
-#define START_PWM 128
-#define MAX_ERR 6
+#define START_PWM 200
 
 void setup_motors();
 void motors_right();
@@ -25,9 +23,10 @@ int weitgts[] = {
 
 int kp = 21;
 int ki = 0;
-int kd = 5;
-int target = 0;
+int kd = 0;
 int tp = START_PWM;
+
+int errors[5] = { 0, 0, 0, 0, 0};
 
 int main()
 {
@@ -44,15 +43,30 @@ int main()
 
   while(1) {
 
+    if(check_all()) {
+    for(int x = 0; x < 4; x++) {
+      errors[x] = errors[x+1];
+    }
+    errors[4] = error;
 
     prev_error = error;
+    }
     error = compute_error();
 
     toggle_led();
 
     if(!check_all()) {
 
-      if(prev_error < 0)
+      int r_count = 0, l_count = 0;
+      for(int i = 0; i < 5; i++) {
+        if(errors[i] < 0)
+          l_count++;
+        if(errors[i] > 0)
+          r_count++;
+      }
+
+
+      if(l_count > r_count)
         motors_left();
       else
         motors_right();
@@ -62,16 +76,13 @@ int main()
 
     else {
 
-      p = error * kp;
-      i += error;
-      i *= ki;
-      d = error - prev_error;
-      d *= kd;
 
-      change_pwm = p + i + d;
+      change_pwm = p;
 
       int right = tp + change_pwm;
       int left = tp - change_pwm;
+      if(right >= 255) right = 255;
+      if(left >= 255) left = 255;
 
       motors_straight();
 
