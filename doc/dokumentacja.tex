@@ -156,16 +156,39 @@ Do sterowania pracą silników wykorzystano mostek H. Mostek H jest układem ele
 (zasada sterowania, użyte układy i ich opis w tym parametrów, innych danych dotyczących
 wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...)
 
-\subsection{Płytka drukowana} Przygotowany robot składa się z dwóch płytek drukowanych: płytki głównej i płytki czujnikowej. Płytka główna jest jednocześnie fundamentem i główną podstawą całego robota. Płytka czujnikowa jest obniżona względem płytki głównej o ok 3cm, aby zapewnić czunikom odpowiednią odległość od trasy (ok 2 mm). Obydwie płytki są ze sobą połączone przewodem 7-pinowym (jeden na każdą czujkę). Proces przygotowania płytki przebiegał następująco:
-  \begin{itemize}
-    \item 
-    \item dokładne wyczyszczenie strony płytki po stronie z miedzią
-    \item ścieranie papierem ściernym niewielkiej ilości miedzi z płytki
+\subsection{Płytka drukowana} Przygotowany robot składa się z dwóch płytek drukowanych: płytki głównej i płytki czujnikowej. Płytka główna jest jednocześnie fundamentem i główną podstawą całego robota. Płytka czujnikowa jest obniżona względem płytki głównej o ok 3cm, aby zapewnić czunikom odpowiednią odległość od trasy (ok 2 mm). Obydwie płytki są ze sobą połączone przewodem 7-pinowym (jeden na każdą czujkę). Odrzucono wariant w którym cała elektronika znajdowałaby się na jednej płytce. Powodem był rozmiar silników jakie udało się nam uzyskać. Silniki mają średnicę ok 3cm, cała płytka główna jest na wysokości ok 6cm od podłoża. Aby zapewnić poprawne działanie czujek, muszą one znajdować się na wysokości ok 2mm od podłoża. Sytuacja ta wymusiła przygotowanie drugiej płytki. Proces przygotowania płytki przebiegał następująco:
+\begin {itemize}
+    \item przygotowanie schematu płytki w programie EAGLE
+    \item wydrukowanie schematu płytki na papierze kredowym
+    \item dokładne wyczyszczenie płytki po stronie pokrytej miedzią
+    \item ścieranie papierem ściernym niewielkiej ilości miedzi z płytk
     \item podgrzanie płytki na żelazku przez ok 30 sekund
     \item przyprasowanie wydrukowanego schematu płytki, pod wpływem temperatury toner ze schematu przykleja się do miedzi
     \item zanurzenie płytki w wodzie w celu odklejenia kartki ze schematem
-    \item zanurzenie płytki w wodzie z wytrawiaczem na ok 15 minut, w celu wytrawienia miedzi w miejscach w których nie ma tonera
+    \item zanurzenie płytki w wodzie z wytrawiaczem na ok 15 minut, w celu wytrawienia miedzi w miejscach na których nie ma tonera
+    \item wytarcie pozostałego tonera octanem etylu
   \end{itemize}
+  Cechy schematu płytki głównej
+  \begin{itemize}
+    \item schemat przygotowano w programie EAGLE
+    \item grubości ścieżek i inne bzdedy PSZEMEK DOKOŃCZ!!!!!!!
+    \item dupa dupa chuj
+  \end{itemize}
+
+
+
+  TODO: TUTAJ BĘDZIE OBRAZEK PŁYTKI GŁÓWNEJ@@@@@@@@@@@@@@@@@@@@
+
+  Cechy schematu płytki czujnikowej
+  \begin{itemize}
+    \item schemat przygotowano w programie EAGLE
+    \item grubości ścieżek i inne bzdedy PSZEMEK DOKOŃCZ!!!!!!!
+    \item dupa dupa chuj
+  \end{itemize}
+
+  TODO: TUTAJ BĘDZIE OBRAZEK PŁYTKI CZUJNIKOWEJ@@@@@@@@@@@@@@@@@@@@
+
+Największym problemem podczas przygotowanie płytki było odpowiednie dobranie czasu prasowania płytki z kartką na której był wydrukowany schemat. Po wielu próbach udało się dobrać odpowiedni czas - ok 5 minut. Czas ten zapewnił prawidłowe i całkowite przyklejenie się tonera do miedzi. Niestety podczas wytrawiania napotkano kolejny problem, mianowicie należało wyjąć płytkę z roztworu w odpowiednim czasie. Tak, aby wytrawiła się miedź w miejscach na których nie ma tonera. Jednocześnie nie można trzymać płytki w roztworze za długo, gdyż zacznie się wytrawiać również część miedzi pod tonerem. W obawie przed wytrawieniem się zbyt dużej ilości miedzi, wyjęto płytkę odrobinę za szybko. Później, podczas sprawdzania okazało się, że osobne ścieżki zwierają się ze sobą w kilku miejscach. Problem ten rozwiązano poprzez mechaniczne usunięcie miedzi śrubotkętem.
 
  i schematy ideowe i montażowe - zasady rozmieszczenia elementów, szeroko-
 ści ścieżek (masa, zasilanie, ...), trasowanie i trawienie płytki, narzędzia IT wspomagające, in-
