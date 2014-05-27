@@ -67,23 +67,25 @@ Stworzony robot spełnia wszystkie warunki dotyczące robotów typu line-followe
 Autonomiczność robota uzyskano poprzez wgranie programu sterującego na mikrokontroler - Atmega8. 
 Do wykrywania trasy wykorzystano czujniki odbiciowe CNY70, które przesyłają sygnał do komparatorów.
 Następnie komparatory przetwarzają te sygnały i przekierowują je dalej do mikrokontrolera, który analizuje je bezpośrednio zaimplementowanym algorytmem. 
-Mikrokontroler steruje pracą silników za pomocą H-mostka, który dostarcza do nich napięcie 12V.
-Cała logika układu jest zasilana z poziomu regulatora napięcia, który otrzymane na wejściu napięcie 12V zmniejsza, dając na wyjściu 5V. 
+Mikrokontroler steruje pracą silników za pomocą H-mostka, który dostarcza do nich napięcie 12V. Robot posiada jedno źródło zasilania. 
+Logika układu jest zasilana z poziomu regulatora napięcia, który otrzymane na wejściu napięcie 12V zmniejsza, dając na wyjściu 5V. 
 
 \section{Mechanika}
 Rysunki, obliczenia, rozwiązania, problemy, pomysły które odrzucono
   Głównymi komponentami mechanicznej strony robota są:
   \subsection{Konstrukcja nośna}
   Podstawą konstrukcji nośnej i jednocześnie miejscem montażowym elementów elektronicznych są dwie płytki laminatu jednostronnego o wymiarach odpowiednio: 143x169mm oraz 111x56mm. Większa płytka zwana dalej będzie płytką główną, zaś mniejsza zwana także dalej płytką czujnikową. Płytka czujnikowa została umieszczona z przodu konstrukcji i obniżona względem płytki głównej za pomocą 3 dystanserów (śruby i szpilki M3) o łącznej długości 33mm. Zabieg ten umożliwił umieszczenie czujników odbiciowych w optymalnej odległości od podłoża 2-3mm.
-  Ścieżki i miejsce przylutowania elementów płytki głównej zostały ulokowane w środkowej części tak, aby możliwe było wygodne przymocowanie wszystkich podzespołów. 
+  Ścieżki i miejsce przylutowania elementów płytki głównej zostały ulokowane w środkowej części tak, aby możliwe było wygodne przymocowanie pozostałych podzespołów (baterii, silników itd).
   W wyniku wykonania powyższych czynności otrzymano spójną i sztywną konstrukcję mechaniczną.
   
   \textsc{Schemat konstrukcji}
   
   \subsection{Układ jezdny}
-  Układ jezdny tworzą silniki na których zamocowano plastikowo-gumowe koła pochodzące z zestawu klocków LEGO o wymiarach 43x28mm.
-  Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blachy o wymiarach 30x60mm. Po zagęciu wykonano nawiercono otwory montownicze.
-  Dodatkowym elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii.
+  Układ jezdny składa się z części napędowej i mechanicznej. Część napędową tworzą dwa silniki 12V. Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blachy o wymiarach 30x60mm. Po zagęciu wykonano nawiercono otwory montownicze.
+  
+  Część mechaniczna składa się z dwóch elementów. Pierwszy są plastikowo-gumowe koła o wymiarach 43x28mm, pochodzące z zestawu klocków LEGO. Koła są zamontowane na silnikach za pomocą kleju na ciepło.
+  
+Drugim elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii.
   
   
 \section{Elektrotechnika}
