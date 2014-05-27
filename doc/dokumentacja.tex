@@ -81,14 +81,14 @@ Logika układu jest zasilana z poziomu regulatora napięcia, który otrzymane na
   \subsection{Układ jezdny}
   Układ jezdny składa się z części napędowej i mechanicznej. Część napędową tworzą dwa silniki 12V. Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blachy o wymiarach 30x60mm. Po zagęciu wykonano nawiercono otwory montownicze.
   
-  Część mechaniczna składa się z dwóch elementów. Pierwszy są plastikowo-gumowe koła o wymiarach 43x28mm, pochodzące z zestawu klocków LEGO. Koła są zamontowane na silnikach za pomocą kleju na ciepło.
+  Część mechaniczna składa się z dwóch elementów. Pierwszym są plastikowo-gumowe koła o wymiarach 43x28mm, pochodzące z zestawu klocków LEGO. Koła są zamontowane na silnikach za pomocą kleju na ciepło.
   
 Drugim elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii.
 
 \section{Elektrotechnika}
 \subsection{Zasilanie}
 Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V połączonych szeregowo co daje napięcie 12V.
- W układzie występują trzy napięcia:
+ W układzie występują trzy różne napięcia:
   \begin{itemize} 
   \item 12V - napięcie silników
   Podawane na H-mostek bezpośrednio z wyjścia baterii.
@@ -149,12 +149,24 @@ Wyjścia CNY70 dołączone są do pinów PC1-PC5 (ADC1-ADC5) mikrokontrolera.
   
   \textsc{schemat płytki z czujnikami}
 
-\subsection{Sterowanie silnikami}
-Do sterowania pracą silników użyto regulator napięcia, który
+\subsection{Sterowanie silnikami} 
+Do sterowania pracą silników wykorzystano mostek H. Mostek H jest układem elektrycznym umożliwiającym sterowanie kierunkiem działania silników prądu stałego. System PWM reguluje prędkość działania silników. Odrzucono wariant w którym planowaliśmy budowę własnego mostka H z tranzystorów z powodu nadmiernej komplikacji układu na płytce.
+
 (zasada sterowania, użyte układy i ich opis w tym parametrów, innych danych dotyczących
 wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...)
 
-\subsection{Płytka drukowana} i schematy ideowe i montażowe - zasady rozmieszczenia elementów, szeroko-
+\subsection{Płytka drukowana} Przygotowany robot składa się z dwóch płytek drukowanych: płytki głównej i płytki czujnikowej. Płytka główna jest jednocześnie fundamentem i główną podstawą całego robota. Płytka czujnikowa jest obniżona względem płytki głównej o ok 3cm, aby zapewnić czunikom odpowiednią odległość od trasy (ok 2 mm). Obydwie płytki są ze sobą połączone przewodem 7-pinowym (jeden na każdą czujkę). Proces przygotowania płytki przebiegał następująco:
+  \begin{itemize}
+    \item 
+    \item dokładne wyczyszczenie strony płytki po stronie z miedzią
+    \item ścieranie papierem ściernym niewielkiej ilości miedzi z płytki
+    \item podgrzanie płytki na żelazku przez ok 30 sekund
+    \item przyprasowanie wydrukowanego schematu płytki, pod wpływem temperatury toner ze schematu przykleja się do miedzi
+    \item zanurzenie płytki w wodzie w celu odklejenia kartki ze schematem
+    \item zanurzenie płytki w wodzie z wytrawiaczem na ok 15 minut, w celu wytrawienia miedzi w miejscach w których nie ma tonera
+  \end{itemize}
+
+ i schematy ideowe i montażowe - zasady rozmieszczenia elementów, szeroko-
 ści ścieżek (masa, zasilanie, ...), trasowanie i trawienie płytki, narzędzia IT wspomagające, in-
 nych danych dotyczących wykonania, problemów które rozwiązano, wariantów które odrzu-
 cono – dlaczego, ...).
