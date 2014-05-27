@@ -114,6 +114,7 @@ re rozwiązano, wariantów które odrzucono – dlaczego, ...),
 (opis konstrukcji, parame-
 trów technicznych, ogólnych zasad sterowania, innych danych dotyczących wykonania, pro-
 blemów które rozwiązano, wariantów które odrzucono – dlaczego
+
 Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producenta HL 149.6.10 AS.
   Silniki pracują w trybie ciągłej rotacji (continous rotation), w opisanej konfiguracji umieszczono je w tylnej części konstrukcji. 
   Do sterowania prędkością i kierunkiem obrotów silników stosuje się sygnał PWM. Prędkość można regulować dla obu kierunków.
@@ -133,21 +134,32 @@ Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producen
 \section{Elektronika}
 
 \subsection{Czujniki}
-(zasada działania, parame-
-try, regulacja czułości, innych danych dotyczących wykonania, problemów które rozwiązano,
+(zasada działania, parametry, regulacja czułości, innych danych dotyczących wykonania, problemów które rozwiązano,
 wariantów które odrzucono – dlaczego, ...),
 
 Do wykrywania koloru zastosowano czujniki CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. 
-Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do Vcc o wartości 47k$\Omega$. 
-Wyjścia CNY70 dołączone są do pinów PC1-PC5 (ADC1-ADC5) mikrokontrolera.
-  Diody podczerwone połączone są szeregowo z rezystorami ograniczającymi prąd o wartości 330$\Omega$.
-  Stan czujników obrazują niebieskie diody podpięte do pinów PD0-PD4. 
-  Trasa przejazdu robota wyznaczona jest czarną linią, zatem świecenie diody obrazuje wykrycie koloru czarnego.
-  Czujniki rozmieszczone są od siebie w odległości 20mm. Jest to podyktowane standardową szerokością taśmy izolacyjnej (19mm), którą powszechnie stosuje się do wyznaczenia trasy.
-  
-  //JESZCZE COŚ DOPISAĆ
-  
-  \textsc{schemat płytki z czujnikami}
+Czujnik wysyła wiązkę promieniowania poprzez nadajnik podczerwieni, a następnie za pomocą fototranzystora, mierzy natężenie światła odbitego. Wyjściem jest sygnał napięciowy, zależny od natężenia światła padającego na ten detektor. Im więcej światła się odbije i dotrze do fotodetektora tym napięcie na wyjściu będzie miało wyższą wartość. Jako że promieniowanie świetlne lepiej odbija powierzchnia jasna ( a ciemna pochłania), dlatego napięcie będzie wyższe na białym materiale.
+
+Specyfikacja czujników CNY70:
+\begin{itemize}
+  \item Napięcie zasilania diody: 5 V
+  \item Maksymalny prąd diody: 50 mA
+  \item Maksymalne napięcie kolektor-emiter: 32 V
+  \item Maksymalny prąd kolektora: 50 mA
+\end{itemize}
+
+\begin{figure}
+  \includegraphics[scale=0.6]{CNY70}
+  \caption{Schemat działania transoptora}
+\end{figure}
+
+Dokumentacja CNY70 dostępna jest pod adresem: \url{http://botland.com.pl/attachment.php?id_attachment=8}
+Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do VCC o wartości 47k$\Omega$. 
+Wyjścia CNY70 dołączone są do pinów PD0-PD6 mikrokontrolera.
+Diody podczerwone połączone są szeregowo z rezystorami wartości 330$\Omega$.
+Czujniki rozmieszczone są od siebie w odległości 20mm co jest podyktowane standardową szerokością taśmy izolacyjnej (19mm), którą powszechnie stosuje się do wyznaczenia trasy.
+Odrzucono koncepcję zastosowania diód sygnalizujących stan czujników w celu oproszczenie schemat płytki.
+\textsc{schemat płytki z czujnikami}
 
 \subsection{Sterowanie silnikami} 
 Do sterowania pracą silników wykorzystano mostek H. Mostek H jest układem elektrycznym umożliwiającym sterowanie kierunkiem działania silników prądu stałego. System PWM reguluje prędkość działania silników. Odrzucono wariant w którym planowaliśmy budowę własnego mostka H z tranzystorów z powodu nadmiernej komplikacji układu na płytce.
