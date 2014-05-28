@@ -1,8 +1,10 @@
+#define F_CPU 16000000UL
 #include <avr/io.h>
 #include <util/delay.h>
 
 #define START_PWM 160
 #define SENSORS 7
+
 
 void setup_motors();
 void motors_right();
@@ -28,9 +30,9 @@ int main()
   setup_motors();
   int error = 0;
   int change_pwm = 0;
-  int prev_error = 1;
-  int left=START_PWM;
-  int right=START_PWM;
+  int prev_error = 0;
+  int left = START_PWM;
+  int right = START_PWM;
   int p = 0;
   int d = 0;
   //motors_straight();
@@ -40,44 +42,46 @@ int main()
     //d = error - prev_error;
     change_pwm = p + d;
     motors_straight();
-    if(error==0){
+    if(error == 0){
       PORTB |= _BV(PB0);
       if(check_all()){
-        OCR1A=200;
-        OCR1B=200;
+        OCR1A = 220;
+        OCR1B = 220;
         //motors_straight();
       }
       else {
-        if (prev_error>0){
-          //OCR1A=120;
-          //OCR1B=200;
+        if (prev_error > 0){
           motors_right();
+          OCR1A = 220;
+          OCR1B = 220;
+          //motors_right();
         }
         else {
-          //OCR1A=200;
-          //OCR1B=120;
           motors_left();
+          OCR1A = 220;
+          OCR1B = 220;
+          //motors_left();
         }
       }
     }
     else {
       PORTB &= ~_BV(PB0);
-      left = START_PWM + change_pwm;
-      right = START_PWM - change_pwm;
+      left = START_PWM - change_pwm;
+      right = START_PWM + change_pwm;
       if(left > 255){
-        right=right+255-left;
+        right = right + 255 - left;
         if(right<0) right = 0;
         left = 255;
       }
       if(right > 255){
-        left=left+255-right;
+        left = left + 255 - right;
         if(left<0) left = 0;
         right = 255;
       }
       OCR1A = right; //zmieniona predkosc podana na silniki
       OCR1B = left; 
     }
-    prev_error=error;
+    if (check_all()) prev_error = error;
       /*if(!((PIND & _BV(PD3)) && (PIND & _BV(PD4)))){
         if(PIND & _BV(PD3)){
           OCR1A=240;
@@ -97,20 +101,19 @@ int main()
           motors_right();
     }*/
     
-    //_delay_ms(5);
+    _delay_ms(5);
 
   }
 }
 
 
 int check_all() {
-  int result = 0;
   int i;
   for(i = 0; i < SENSORS; i++) {
     if(PIND & _BV(sensors[i]))
-        result = 1;
+        return 1;
   }
-  return result;
+  return 0;
 }
 
 
@@ -148,14 +151,14 @@ void motors_left() {
   PORTC &= ~_BV(PC0); //silnik ustawiony w tryb jazdy (0,1)
   PORTC |= _BV(PC1);
 
-  PORTC &= ~_BV(PC2); //silnik w trybie stopu(0,0)
+  PORTC |= _BV(PC2); //silnik w trybie stopu(0,0)
   PORTC &= ~_BV(PC3);
 
 }
 
 void motors_right() {
 
-  PORTC &= ~_BV(PC0);//silnik w trybie stopu(0,0)
+  PORTC |= _BV(PC0);//silnik w trybie stopu(0,0)
   PORTC &= ~_BV(PC1);
 
   PORTC &= ~_BV(PC2);//silnik w trybie jazdy(0,1)
