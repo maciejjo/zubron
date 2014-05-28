@@ -17,7 +17,7 @@ int sensors[] = {
 int weitgts[] = {
   -3, -2, -1, 0, 1, 2, 3 };
 
-int kp = 10;
+int kp = 20;
 int kd = 1;
 
 int main()
@@ -33,28 +33,30 @@ int main()
   int right=START_PWM;
   int p = 0;
   int d = 0;
+  //motors_straight();
   while(1) {
     error = compute_error();
     p = error * kp;
-    d = error - prev_error;
+    //d = error - prev_error;
     change_pwm = p + d;
+    motors_straight();
     if(error==0){
       PORTB |= _BV(PB0);
-      if(PIND & _BV(PD0)){
+      if(check_all()){
         OCR1A=200;
         OCR1B=200;
         //motors_straight();
       }
       else {
         if (prev_error>0){
-          OCR1A=140;
-          OCR1B=2000;
-          //motors_right();
+          //OCR1A=120;
+          //OCR1B=200;
+          motors_right();
         }
         else {
-          OCR1A=200;
-          OCR1B=140;
-          //motors_left();
+          //OCR1A=200;
+          //OCR1B=120;
+          motors_left();
         }
       }
     }
@@ -64,12 +66,12 @@ int main()
       right = START_PWM - change_pwm;
       if(left > 255){
         right=right+255-left;
-        if(right<0) right=0;
+        if(right<0) right = 0;
         left = 255;
       }
       if(right > 255){
         left=left+255-right;
-        if(left<0) left=0;
+        if(left<0) left = 0;
         right = 255;
       }
       OCR1A = right; //zmieniona predkosc podana na silniki
@@ -95,7 +97,7 @@ int main()
           motors_right();
     }*/
     
-    _delay_ms(5);
+    //_delay_ms(5);
 
   }
 }
