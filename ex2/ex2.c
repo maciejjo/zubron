@@ -21,7 +21,7 @@ int sensors[] = {
 int weitgts[] = {
   -3, -2, -1, 0, 1, 2, 3 };
 
-int kp = 21;
+int kp = 15;
 int ki = 0;
 int kd = 0;
 int tp = START_PWM;
@@ -43,15 +43,17 @@ int main()
 
   while(1) {
 
-    if(check_all()) {
-    for(int x = 0; x < 4; x++) {
-      errors[x] = errors[x+1];
-    }
-    errors[4] = error;
-
     prev_error = error;
-    }
     error = compute_error();
+
+
+    if(check_all()) {
+      for(int x = 0; x < 4; x++) {
+        errors[x] = errors[x+1];
+      }
+      errors[4] = error;
+    }
+
 
     toggle_led();
 
@@ -76,22 +78,23 @@ int main()
 
     else {
 
+      p = error;
 
-      change_pwm = p;
+      change_pwm = kp*p;
 
       int right = tp + change_pwm;
       int left = tp - change_pwm;
-      if(right >= 255) right = 255;
-      if(left >= 255) left = 255;
+      if(right > 255) right = 255;
+      if(left > 255) left = 255;
 
       motors_straight();
 
       OCR1A = right;
       OCR1B = left;
 
-      _delay_ms(5);
 
     }
+    _delay_ms(5);
 
   }
 }
