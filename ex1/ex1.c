@@ -2,7 +2,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define START_PWM 160
+#define START_PWM 200
 #define SENSORS 7
 
 
@@ -20,7 +20,8 @@ int weitgts[] = {
   -3, -2, -1, 0, 1, 2, 3 };
 
 int kp = 20;
-int kd = 1;
+int ki = 1;
+int kd = 3;
 
 int main()
 {
@@ -34,16 +35,18 @@ int main()
   int left = START_PWM;
   int right = START_PWM;
   int p = 0;
+  int i = 0;
   int d = 0;
   //motors_straight();
   while(1) {
     error = compute_error();
     p = error * kp;
-    //d = error - prev_error;
-    change_pwm = p + d;
+    d = error - prev_error;
+    i += error;
+    change_pwm = p + ki*i + kd*d;
     motors_straight();
     if(error == 0){
-      PORTB |= _BV(PB0);
+      //PORTB |= _BV(PB0);
       if(check_all()){
         OCR1A = 220;
         OCR1B = 220;
@@ -51,13 +54,15 @@ int main()
       }
       else {
         if (prev_error > 0){
-          motors_right();
+          motors_left();
+          //motors_right();
           OCR1A = 220;
           OCR1B = 220;
           //motors_right();
         }
         else {
-          motors_left();
+          motors_right();
+          //motors_left();
           OCR1A = 220;
           OCR1B = 220;
           //motors_left();
@@ -101,7 +106,7 @@ int main()
           motors_right();
     }*/
     
-    _delay_ms(5);
+    _delay_ms(7);
 
   }
 }
