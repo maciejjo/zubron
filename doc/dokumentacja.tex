@@ -162,7 +162,7 @@ Odrzucono koncepcję zastosowania diód sygnalizujących stan czujników w celu 
 \textsc{schemat płytki z czujnikami}
 
 \subsection{Sterowanie silnikami} 
-Do sterowania pracą silników wykorzystano mostek H. Mostek H jest układem elektrycznym umożliwiającym sterowanie kierunkiem działania silników prądu stałego. System PWM reguluje prędkość działania silników. Odrzucono wariant w którym planowaliśmy budowę własnego mostka H z tranzystorów z powodu nadmiernej komplikacji układu na płytce.
+Do sterowania pracą silników wykorzystano mostek H. Jest to układ elektrycznym umożliwiający sterowanie kierunkiem działania silników prądu stałego. System PWM reguluje prędkość działania silników. Odrzucono wariant budowy własnego mostka H z tranzystorów z powodu nadmiernej komplikacji układu na płytce.
 
 (zasada sterowania, użyte układy i ich opis w tym parametrów, innych danych dotyczących
 wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...)
@@ -216,11 +216,14 @@ wybranego mikrokontrolera, otoczenie mikrokontrolera, innych danych dotyczących
 nania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).
   Robotem steruje mikrokontroler ATmega8.
   Mikrokontroler taktowany jest zewnętrznym oscylatorem kwarcowym o wartości 16MHz. Do pinów PD0-PD4 podpiętych jest 5 niebieskich diod 3mm szeregowo z rezystorami 670$\Omega$ obrazujących stan czujników koloru.
-  
+   
   \textsc{schemat mikrokontrolera}
 
 \section{Oprogramowanie}
   \subsection{Algorytm}
+  Algorytm sterujący robotem został napisany w języku C. Następnie kod algorytmu został skompilowany w AVR-GCC. Kompilator ten wydany przez firmę ATMEL. Skompilowany program wgrano na mikrokontroler używając programu AVRDUDE. Mikrokontroler jest połączony z wejściem USB komputera za pomocą programatora USB-ASP. 
+  Bazą algorytmu jest sterownik PID (człon proporcjonalno całkująco różniczkujący). Dodatkowymi usprawnieniami jest zawracanie po zgubieniu trasy. Program opierra się na głównej pętli w której w pierwszym kroku ssprawdzany jest stan czujników i jeśli wykrywają one linię, to uruchamiany jest algorytm PID, w przeciwnym razie uruchamiana jest procedura odpowiedzialna za powrót na trasę, Odbywa się to poprzez zapamiętanie stanu czujników z poprzedniego odczytu, co dostarcza informacji o prawidłowym kierunku powrotu.
+
   \subsection{Kod źródłowy}
 //z komentarzami, każda linijka numerowana
   Program został zaimplementowany w języku C. Piny PB1-PB2 (sygnał PWM dla serwomechanizmów) oraz PD0-PD4 (diody sygnalizujące stan czujników) zostały ustawione jako wyjściowe, natomiast piny PC1-PC5 (ADC1-ADC5, odczyt stanu czujników) oraz pin PB0 (przycisk uruchamiający) jako piny wejściowe. Odczyt czujników koloru polega na odczycie stanów na pinach PC1-PC5 mikrokontrolera.
