@@ -24,16 +24,16 @@
 \begin{tabularx}{\linewidth}{rl}
   \hline
   Nazwa robota: & \\
-  & Żubroń - seksmaszyna \\
+  & Żubroń \\
   \hline 
   Członkowie drużyny: & \\
-  machanika, programowanie, dokumentacja & Szymon Gramza \\
-  mechanika, projektowanie PCB & Przemysław Hoffmann \\
-  mechanika, wideo & Maciej Królikowski \\
-  mechanika, programowanie, dokumentacja & Damian Michalak \\
+  machanika, dokumentacja & Szymon Gramza \\
+  programowanie, projektowanie PCB & Przemysław Hoffmann \\
+  mzechanika, wideo & Maciej Królikowski \\
+  lutowanie, wideo, dokumentacja & Damian Michalak \\
   mechanika, programowanie, projektowanie PCB & Maciej Sobkowski \\
-  mechanika, wideo & Adam Szczesiak \\
-  mechanika, programowanie & Kamil Wygralak \\
+  lutowanie, mechanika, wideo & Adam Szczesiak \\
+  mechanika, programowanie, testowanie & Kamil Wygralak \\
   \hline
   Prowadzący: & \\
   & dr inż Rafał Klaus \\
@@ -47,43 +47,48 @@
 
 \section{Wstęp i opis projektu}
 Celem projektu było skonstruowanie robota typu Line Follower i wystartowanie w zawodach RoboDay 2014.
-Zadaniem robota typu Line Follower jest pokonanie trasy wyznaczonej przez czarną linię umieszczoną na jasnej powierzchni. Wykorzystując odpowiednie sensory i działając według zaimplementowanego algorytmu, nie mogą one z niej zjechać.
+Zadaniem robota typu Line Follower jest pokonanie trasy wyznaczonej przez czarną linię umieszczoną na jasnej powierzchni. 
+Wykorzystując odpowiednie sensory i działając według zaimplementowanego algorytmu, robot musi utrzymać się na trasie przez 2 okrążenia.
 \newline Wymagania dotyczące konstrukcji i specyfiki:
 \begin{itemize}
-  \item Główny obrys robota musi mieścić się na kartce papieru formatu A4,
-  \item waga robota nie jest ograniczona
-  \item robot musi poruszać się w sposób autonomiczny. Komunikacja z robotem w czasie przejazdu jest zabroniona,
-  \item robot powinien być tak zaprojektowany by można było go uruchomić na znak dany przez sędziego.
+  \item musi mieścić się na kartce papieru formatu A4,
+  \item waga nie jest ograniczona
+  \item musi poruszać się w sposób autonomiczny, komunikacja z robotem w czasie przejazdu jest zabroniona,
+  \item powinien być tak zaprojektowany, by można było go uruchomić na znak dany przez sędziego.
 \end{itemize}
 Wymagania dotyczące trasy:
 \begin{itemize}
-  \item Trasa składać się będzie z białej powierzchni i czarnej linii o szerokości 19$\pm$ 1 mm,
+  \item składa się z jasnej powierzchni i czarnej linii o szerokości 19$\pm$ 1 mm,
   \item kąt zakrętu o promieniu 0 to maksymalnie 90 stopni,
-  \item minimalna odległość między dwiema równoległymi liniami to 210mm,
+  \item minimalna odległość między równoległymi liniami to 210mm,
   \item minimalna odległość między krawędziami planszy a torem to 210mm.
 \end{itemize}
 \section{Idea rozwiązania}
-Stworzony robot spełnia wszystkie warunki dotyczące robotów typu line-follower.
-Autonomiczność robota uzyskano poprzez wgranie programu sterującego na mikrokontroler - Atmega8. 
-Do wykrywania trasy wykorzystano czujniki odbiciowe CNY70, które przesyłają sygnał do komparatorów.
-Następnie komparatory przetwarzają te sygnały i przekierowują je dalej do mikrokontrolera, który analizuje je bezpośrednio zaimplementowanym algorytmem. 
-Mikrokontroler steruje pracą silników za pomocą H-mostka, który dostarcza do nich napięcie 12V. Robot posiada jedno źródło zasilania. 
-Logika układu jest zasilana z poziomu regulatora napięcia, który otrzymane na wejściu napięcie 12V zmniejsza, dając na wyjściu 5V. 
+Stworzony robot spełnia wszystkie powyższe warunki.
+Autonomiczność robota uzyskano poprzez umieszczenie programu sterującego na mikrokontrolerze Atmega8. 
+Do wykrywania trasy wykorzystano czujniki odbiciowe CNY70, które podłączone są do komparatorów.
+Następnie komparatory porównują te sygnały z napięciem odniesienia. Wyjścia komparatorów podłączone są do mikrokontrolera.
+Otrzymane sygnały stanowią dane wejściowe dla algorytmu.
+Mikrokontroler steruje pracą silników za pomocą mostka H. Robot posiada jedno źródło zasilania.
 
 \section{Mechanika}
   Głównymi komponentami mechanicznej strony robota są:
   \subsection{Konstrukcja nośna}
-  Podstawą konstrukcji nośnej i jednocześnie miejscem montażowym elementów elektronicznych są dwie płytki laminatu jednostronnego o wymiarach odpowiednio: 143x169mm oraz 111x56mm. Większa płytka zwana dalej będzie płytką główną, zaś mniejsza zwana także dalej płytką czujnikową. Płytka czujnikowa została umieszczona z przodu konstrukcji i obniżona względem płytki głównej za pomocą 3 dystanserów (śruby i szpilki M3) o łącznej długości 33mm. Zabieg ten umożliwił umieszczenie czujników odbiciowych w optymalnej odległości od podłoża 2-3mm.
+  Podstawą konstrukcji nośnej i jednocześnie miejscem montażowym elementów elektronicznych są dwie płytki laminatu szklano-epoksydowego typu FR4, jednostronnego o wymiarach odpowiednio: 143x169mm oraz 111x56mm. Większa płytka zwana dalej będzie płytką główną, zaś mniejsza zwana płytką czujnikową.   Płytka czujnikowa została umieszczona z przodu konstrukcji i obniżona względem płytki głównej za pomocą 6 dystanserów(2x3 dystansery).
+  Obniżenie uzyskane w ten sposób wyniosło 33mm i umożliwiło umieszczenie czujników odbiciowych w optymalnej odleości od podłoża 2,5mm.
   Ścieżki i miejsce przylutowania elementów płytki głównej zostały ulokowane w środkowej części tak, aby możliwe było wygodne przymocowanie pozostałych podzespołów (baterii, silników itd).
-  W wyniku wykonania powyższych czynności otrzymano spójną i sztywną konstrukcję mechaniczną.
-  \textsc{Schemat konstrukcji}
-  Początkowy projekt zakładał jedną płytkę montażową do której planowano zamocować za pomocą dystanserów płytki z układami logicznymi, jednak odrzucono ten pomysł mając na uwadze zmniejszenie całkowitej wagi robota. Zastosowany schemat konstrukcji pozwolił na łatwy dostęp do elementów, głównie do mikroprocesora, co było przydatne podczas programowania. Ponadto utrzymano transparentność oraz ułatwiono ewentualną wymianę podzespołów w przypadku awarii.
+  W wyniku wykonania powyższych czynności otrzymano sztywną konstrukcję mechaniczną.
+  \begin{figure}
+    \includegraphics[scale=0.48]{zubron_main}
+    \caption{Zdjęcie konstrukcji}
+  \end{figure}
+  Początkowy projekt zakładał jedną płytkę montażową do której planowano zamocować za pomocą dystanserów płytki z układami elektronicznymi, jednak odrzucono ten pomysł mając na uwadze zmniejszenie całkowitej wagi robota. Zastosowany schemat konstrukcji pozwolił na łatwy dostęp do elementów, głównie do mikroprocesora, co było przydatne podczas programowania. Ponadto utrzymano transparentność oraz ułatwiono ewentualną wymianę podzespołów w przypadku awarii.
   \subsection{Układ jezdny}
-  Układ jezdny składa się z części napędowej i mechanicznej. Część napędową tworzą dwa silniki 12V. Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników które powstały w wyniku zagięcia w połowie długości pod kątem 90 stopni, prostokątnego wycinka blachy o wymiarach 30x60mm. Po zagęciu wykonano nawiercono otwory montownicze.
+  Układ jezdny składa się z części napędowej i mechanicznej. Część napędową tworzą dwa silniki 12V. Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników o wymiarach 30x60mm. W kątownikach nawiercono na środku otwory montownicze zgodne z notą katalogową silników.
   
   Część mechaniczna składa się z dwóch elementów. Pierwszym są plastikowo-gumowe koła o wymiarach 43x28mm, pochodzące z zestawu klocków LEGO. Koła są zamontowane na silnikach za pomocą kleju na ciepło.
-  
-Drugim elementem układu jezdnego jest zamocowany w przedniej części caster, który został wykonany na tokarce w domowych warunkach w celu zmniejszenia kosztów projektu. Przednie koło zapewnia stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii.
+  e
+Drugim elementem układu jezdnego jest zamocowane w przedniej części koło kastora, które zostało wykonane na tokarce w celu zmniejszenia kosztów projektu. Zapewnia ono stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii. Wypoziomowanie konstrukcji uzyskano umieszczając pomiędzy kołem kastora, a płytką drewniany klocek.
 
 \section{Elektrotechnika}
 \subsection{Zasilanie}
@@ -91,54 +96,37 @@ Zasilanie układu jest dostarczane z pakietu 8 baterii o napięciu 1,5V połącz
  W układzie występują trzy różne napięcia:
   \begin{itemize} 
   \item 12V - napięcie silników
-  Podawane na H-mostek bezpośrednio z wyjścia baterii.
+  Podawane na mostek H bezpośrednio z wyjścia baterii.
   Wykorzystywane jest do zasilania silników poprzez sterownik silników.
   \item 5V - napięcie zasilania logiki
   Jest to napięcie wyjściowe otrzymane z regulatora napięcia LM7805, który z wejściowego napięcia 12V daje na wyjściu 5V.
-  Wykorzystywane jest ono do zasilania układów logicznych mikrokontrolera, H-mostka i komparatorów oraz do zasilania diód w transoptorach.
+  Wykorzystywane jest ono do zasilania układów logicznych mikrokontrolera, mostka H i komparatorów oraz do zasilania diód w transoptorach.
   \item 0-5V - regulowane potencjometrem
   Wejściowym napięciem dla potencjometru jest 5V. Jest ono wykorzystywane do regulowania napięcia progowego, używanego do sterowania czułością transoptorów.
   \end{itemize}
-  Nie mierzono dokładnego czasu pracy robota na bateriach jednak szacuje się, że wynosi on około 2h.
+  Szacuje się, że czas pracy na bateriach wynosi on około 2h +/-20 w zależności od jakości baterii.
 
-Inne: odrzucono wariant dodania histerezy (w celu uniknięcia wielu zmian stanów 0->1 i 1->0 spowodowane podobnym co do wartości napięciom wejściowym komparatora pochodzących z transoptorów oraz potencjometru) z powodu konieczności tworzenia dwustronnej płytki co jest trudne do wykonania.
-Rozwiązano problem przegrzewania się stabilizatora prze zamocowanie przy nim radiatora oraz przez użycie rezystorów o większym oporze przy diodach CNY70.
-
-[natężenie, moc, napięcie, czas pracy
-bez doładowania, waga, stabilizacja, innych danych dotyczących wykonania, problemów któ-
-re rozwiązano, wariantów które odrzucono – dlaczego, ...), 
-    
-  \textsc{schemat bloku zasilania}
+  Odrzucono wariant kombinacji komparatora z dodatkowymi resystorami, dzięki któremu miano uzyskać zjawisko histerezy (uniknięcia wielu zmian stanów 0->1 i 1->0 spowodowane podobnym co do wartości napięciom wejściowym komparatora pochodzących z transoptorów oraz potencjometru).
+  Powodem odrzucenia było zbytnie skomplikowanie układu, dodatkowo stwierdzono, że problem który miała rozwiązywać można obejść stosując potencjiometr w którym można kontrolować napięcie odniesienia w zależności od warunków.
+  Rozwiązano problem przegrzewania się stabilizatora przez zamocowanie przy nim radiatora oraz przez użycie rezystorów o większym oporze przy diodach CNY70.
 
 \subsection{Silniki}
-(opis konstrukcji, parame-
-trów technicznych, ogólnych zasad sterowania, innych danych dotyczących wykonania, pro-
-blemów które rozwiązano, wariantów które odrzucono – dlaczego
-
-Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producenta HL 149.6.10 AS.
-  Silniki pracują w trybie ciągłej rotacji (continous rotation), w opisanej konfiguracji umieszczono je w tylnej części konstrukcji. 
-  Do sterowania prędkością i kierunkiem obrotów silników stosuje się sygnał PWM. Prędkość można regulować dla obu kierunków.
-  Charakterystyka zastosowanych silników:
-  \begin{itemize}
-    \item prędkość kątowa: 60 obr./min.
-    \item moment obrotowy: 3,4 kg/cm
-    \item napięcie zasilania: 12V DC
-    \item wymiary: 40,5x20x38mm
-    \item waga: 45g
-  \end{itemize}
- Wybór tych silników był motywowany brakiem konieczności stosowania dodatkowej przekładni gdyż mają wysoki moment obrotowy.
- Dodatkowym czynnikiem była niska cena silników, jednak główną motywacją był wysoki współczynnik jakości do ceny.
+  Robot napędzany jest dwoma silnikami firmy Micro motors o oznaczeniach producenta HL 149.6.10 AS.
+  Silniki pracują w trybie ciągłej rotacji (continous rotation), umieszczono je w tylnej części konstrukcji. 
+  Do sterowania prędkością obrotów silników stosuje się sygnał PWM. Kierunek ich pracy jest ustalany programowo.
+  Napięcie silników wynosi 12V.
+  Ich wybór był motywowany brakiem konieczności stosowania dodatkowej przekładni gdyż mają wysoki moment obrotowy, ich wewnętrzne przełożenie wynosi 10:1. Dodatkowym czynnikiem była niska cena silników gdyż pochodziły z odzysku, jednak główną motywacją był wysoki współczynnik jakości do ceny.
  
-  \textsc{Schemat konstrukcji}
+  \begin{figure}[H]
+  \includegraphics[scale=0.5]{engine_scheme}
+  \caption{Schemat silnika}
+\end{figure}
 
 \section{Elektronika}
-
 \subsection{Czujniki}
-(zasada działania, parametry, regulacja czułości, innych danych dotyczących wykonania, problemów które rozwiązano,
-wariantów które odrzucono – dlaczego, ...),
-
-Do wykrywania koloru zastosowano czujniki CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. 
-Czujnik wysyła wiązkę promieniowania poprzez nadajnik podczerwieni, a następnie za pomocą fototranzystora, mierzy natężenie światła odbitego. Wyjściem jest sygnał napięciowy, zależny od natężenia światła padającego na ten detektor. Im więcej światła się odbije i dotrze do fotodetektora tym napięcie na wyjściu będzie miało wyższą wartość. Jako że promieniowanie świetlne lepiej odbija powierzchnia jasna ( a ciemna pochłania), dlatego napięcie będzie wyższe na białym materiale.
+Do wykrywania trasy zastosowano transoptory CNY70 – układ diody podczerwonej i fototranzystora w jednej obudowie. 
+Czujnik wysyła wiązkę promieniowania poprzez nadajnik podczerwieni, a następnie za pomocą fototranzystora, mierzy natężenie światła odbitego. 
+Wyjściem jest sygnał napięciowy, zależny od natężenia światła padającego na ten detektor. Im więcej światła się odbije i dotrze do fotodetektora tym napięcie na wyjściu będzie miało wyższą wartość. Wykrycie czarnego koloru jest sygnalizowane stanem wysokim.
 
 Specyfikacja czujników CNY70:
 \begin{itemize}
@@ -148,12 +136,11 @@ Specyfikacja czujników CNY70:
   \item Maksymalny prąd kolektora: 50 mA
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[scale=0.6]{CNY70}
   \caption{Schemat działania transoptora}
 \end{figure}
 
-Dokumentacja CNY70 dostępna jest pod adresem: \url{http://botland.com.pl/attachment.php?id_attachment=8}
 Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do VCC o wartości 47k$\Omega$. 
 Wyjścia CNY70 dołączone są do pinów PD0-PD6 mikrokontrolera.
 Diody podczerwone połączone są szeregowo z rezystorami wartości 330$\Omega$.
@@ -240,6 +227,13 @@ blemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).
 
 \section{Inżynieria oprogramowania i metodyki prowadzenia projektu}
   \subsection{Analiza SWOT członków zespołu}
+  \begin{figure}[H]
+  \includegraphics[scale=0.8]{chart_workprogress}
+  \caption{Wykres postępu}
+\end{figure}
+  
+
+  
   
 \newgeometry{rmargin=1cm}
 \newgeometry{lmargin=1cm}
