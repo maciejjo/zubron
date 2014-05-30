@@ -141,70 +141,74 @@ Specyfikacja czujników CNY70:
   \caption{Schemat działania transoptora}
 \end{figure}
 
-Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do VCC o wartości 47k$\Omega$. 
-Wyjścia CNY70 dołączone są do pinów PD0-PD6 mikrokontrolera.
-Diody podczerwone połączone są szeregowo z rezystorami wartości 330$\Omega$.
-Czujniki rozmieszczone są od siebie w odległości 20mm co jest podyktowane standardową szerokością taśmy izolacyjnej (19mm), którą powszechnie stosuje się do wyznaczenia trasy.
-Odrzucono koncepcję zastosowania diód sygnalizujących stan czujników w celu oproszczenie schemat płytki.
+Do spolaryzowania napięcia na kolektorze fototranzystora wykorzystano rezystory podciągające do VCC o wartości 10k$\Omega$. 
+Wyjścia CNY70 podłączone są do pinów PD0-PD6 mikrokontrolera.
+Każda dioda połączona jest z rezystorami wartości 220$\Omega$. Początkowo zastosowano rezystory 75$\Omega$ jednak powodowało to zbyt duży pobór prądu i skutkowało nadmiernym wydzielaniem się ciepła na regulatorze napięcia. Doświadczalnie dobrano resystory 220$\Omega$.
+Czujniki rozmieszczone są od siebie w odległości 15mm co jest podyktowane regulaminową szerokością linii trasy. Doświadczalnie ustaliliśmy dystans między czujnikami na 75\% szerokości linii.
+Odrzucono koncepcję zastosowania diód sygnalizujących stan czujników w celu oproszczenie schematu płytki.
 \textsc{schemat płytki z czujnikami}
 
 \subsection{Sterowanie silnikami} 
-Do sterowania pracą silników wykorzystano mostek H. Jest to układ elektrycznym umożliwiający sterowanie kierunkiem działania silników prądu stałego. System PWM reguluje prędkość działania silników. Odrzucono wariant budowy własnego mostka H z tranzystorów z powodu nadmiernej komplikacji układu na płytce.
+Do sterowania pracą silników wykorzystano gotowy mostek H. Jest to układ elektryczny umożliwiający sterowanie kierunkiem działania silników. 
+Prędkość regulowana jest sygnałem PWM. Odrzucono wariant budowy własnego mostka H z tranzystorów z powodu nadmiernej komplikacji układu na płytce.
 
-(zasada sterowania, użyte układy i ich opis w tym parametrów, innych danych dotyczących
-wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...)
-
-\subsection{Płytka drukowana} Przygotowany robot składa się z dwóch płytek drukowanych: płytki głównej i płytki czujnikowej. Płytka główna jest jednocześnie fundamentem i główną podstawą całego robota. Płytka czujnikowa jest obniżona względem płytki głównej o ok 3cm, aby zapewnić czunikom odpowiednią odległość od trasy (ok 2 mm). Obydwie płytki są ze sobą połączone przewodem 7-pinowym (jeden na każdą czujkę). Odrzucono wariant w którym cała elektronika znajdowałaby się na jednej płytce. Powodem był rozmiar silników jakie udało się nam uzyskać. Silniki mają średnicę ok 3cm, cała płytka główna jest na wysokości ok 6cm od podłoża. Aby zapewnić poprawne działanie czujek, muszą one znajdować się na wysokości ok 2mm od podłoża. Sytuacja ta wymusiła przygotowanie drugiej płytki. Proces przygotowania płytki przebiegał następująco:
-\begin {itemize}
+\subsection{Płytka drukowana} 
+Przygotowany robot składa się z dwóch płytek drukowanych: płytki głównej i płytki czujnikowej. 
+Obydwie płytki są ze sobą połączone przewodami 7-żyłowym (każdy przenosi sygnał jednej czujki) oraz 2-żyłowym (zasilającym).
+Odrzucono wariant w którym cała elektronika znajdowałaby się na jednej płytce. Powodem był rozmiar silników jakie udało się nam uzyskać. 
+Płytka główna jest na wysokości 41mm od podłoża. Aby zapewnić poprawne działanie czujek, muszą one znajdować się na wysokości do 5mm od podłoża. 
+Sytuacja ta wymusiła przygotowanie drugiej płytki. Proces przygotowania płytki przebiegał następująco:
+  \begin {itemize}
     \item przygotowanie schematu płytki w programie EAGLE
     \item wydrukowanie schematu płytki na papierze kredowym
     \item dokładne wyczyszczenie płytki po stronie pokrytej miedzią
-    \item ścieranie papierem ściernym niewielkiej ilości miedzi z płytk
-    \item podgrzanie płytki na żelazku przez ok 30 sekund
+    \item ścieranie papierem ściernym niewielkiej ilości miedzi z płytki
+    \item podgrzanie płytki na żelazku przez ok. 30 sekund
     \item przyprasowanie wydrukowanego schematu płytki, pod wpływem temperatury toner ze schematu przykleja się do miedzi
     \item zanurzenie płytki w wodzie w celu odklejenia kartki ze schematem
-    \item zanurzenie płytki w wodzie z wytrawiaczem na ok 15 minut, w celu wytrawienia miedzi w miejscach na których nie ma tonera
+    \item zanurzenie płytki w roztworze wody z wytrawiaczem na ok. 15 minut, w celu wytrawienia miedzi w miejscach na których nie ma tonera
     \item wytarcie pozostałego tonera octanem etylu
   \end{itemize}
-  Cechy płytki głównej
+Cechy płytki głównej
   \begin{itemize}
-    \item schemat przygotowano w programie EAGLE
     \item długość: 171mm
     \item szerokość: 143mm
-    \item grubości ścieżek i inne bzdedy PSZEMEK DOKOŃCZ!!!!!!!
-    \item dupa dupa chuj
+    \item grubość ścieżek: 0,6096mm
   \end{itemize}
 
-
-
-  @@@@@@@@@@@@@@@@@@@@@@ TUTAJ BĘDZIE OBRAZEK PŁYTKI GŁÓWNEJ@@@@@@@@@@@@@@@@
+  \begin{figure}[H]
+  \includegraphics[scale=0.8]{schemat_glowna}
+  \caption{Schemat płytki głównej}
+\end{figure}
 
   Cechy płytki czujnikowej
   \begin{itemize}
-    \item schemat przygotowano w programie EAGLE
     \item długość: 57mm
     \item szerokość: 111mm
-    \item grubości ścieżek i inne bzdedy PSZEMEK DOKOŃCZ!!!!!!!
-    \item dupa dupa chuj
+    \item grubość ścieżek: 0,4064mm
   \end{itemize}
 
-  @@@@@@@@@@@@@@@@@@@@@@: TUTAJ BĘDZIE OBRAZEK PŁYTKI CZUJNIKOWEJ@@@@@@@@@@@
+  \begin{figure}[H]
+  \includegraphics[scale=0.38]{schemat_czujniki}
+  \caption{Schemat płytki czujnikowej}
+\end{figure}
 
-Największym problemem podczas przygotowanie płytki było odpowiednie dobranie czasu prasowania płytki z kartką na której był wydrukowany schemat. Po wielu próbach udało się dobrać odpowiedni czas - ok 5 minut. Czas ten zapewnił prawidłowe i całkowite przyklejenie się tonera do miedzi. Niestety podczas wytrawiania napotkano kolejny problem, mianowicie należało wyjąć płytkę z roztworu w odpowiednim czasie. Tak, aby wytrawiła się miedź w miejscach na których nie ma tonera. Jednocześnie nie można trzymać płytki w roztworze za długo, gdyż zacznie się wytrawiać również część miedzi pod tonerem. W obawie przed wytrawieniem się zbyt dużej ilości miedzi, wyjęto płytkę odrobinę za szybko. Później, podczas sprawdzania okazało się, że osobne ścieżki zwierają się ze sobą w kilku miejscach. Problem ten rozwiązano poprzez mechaniczne usunięcie miedzi śrubotkętem.
-
- i schematy ideowe i montażowe - zasady rozmieszczenia elementów, szeroko-
-ści ścieżek (masa, zasilanie, ...), trasowanie i trawienie płytki, narzędzia IT wspomagające, in-
-nych danych dotyczących wykonania, problemów które rozwiązano, wariantów które odrzu-
-cono – dlaczego, ...).
+Największym problemem podczas przygotowanie płytki było odpowiednie dobranie czasu prasowania płytki z kartką na której był wydrukowany schemat. 
+Po wielu próbach udało się dobrać odpowiedni - ok 5 minut. Czas ten zapewnił prawidłowe i całkowite przyklejenie się tonera do miedzi. 
+Niestety podczas wytrawiania napotkano kolejny problem, mianowicie należało wyjąć płytkę z roztworu w odpowiednim momencie - tak, aby wytrawiła się miedź w miejscach na których nie ma tonera. Jednocześnie nie można trzymać płytki w roztworze za długo, gdyż zacznie się wytrawiać również część miedzi pod tonerem. W obawie przed nadmiernym wytrawieniem, wyjęto płytkę odrobinę za szybko. Później, podczas sprawdzania okazało się, że osobne ścieżki zwierają się ze sobą w kilku miejscach. Problem ten rozwiązano poprzez mechaniczne usunięcie miedzi śrubokrętem.
 
 \section{Mikrokontroler}
 (dobór – kryteria, analiza narzędzi uruchomieniowych,...), (opis
 wybranego mikrokontrolera, otoczenie mikrokontrolera, innych danych dotyczących wyko-
 nania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).
-  Robotem steruje mikrokontroler ATmega8.
-  Mikrokontroler taktowany jest zewnętrznym oscylatorem kwarcowym o wartości 16MHz. Do pinów PD0-PD4 podpiętych jest 5 niebieskich diod 3mm szeregowo z rezystorami 670$\Omega$ obrazujących stan czujników koloru.
+  Robotem steruje mikrokontroler ATmega8. Zasilany napięciem 5V, posiada 28 wyprowadzeń, których większość może pełnić różne role takie jak: wyjścia/wejścia cyfrowe, wejścia sygnałów przerwań, lub wejścia przetwornika ADC.
+  Mikrokontroler taktowany jest zewnętrznym oscylatorem kwarcowym o wartości 16MHz.
+  
    
-  \textsc{schemat mikrokontrolera}
+\begin{figure}[H]
+  \includegraphics[scale=1]{atmega8}
+  \caption{Schemat mikrokontrolera}
+\end{figure}
 
 \section{Oprogramowanie}
   \subsection{Algorytm}
