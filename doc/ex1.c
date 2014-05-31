@@ -3,14 +3,25 @@
 #include <util/delay.h>
 
 #define START_PWM 150
-#define SENSORS 7
+#define TURN_PWM  140
+#define MAX_PWM   255
+
+#define SENSORS   7
+
+#define K_P 15
+#define K_I 2
+#define K_D 1
 
 void setup_motors();
+void setup_sensors();
+
 void motors_right();
 void motors_left();
 void motors_straight();
+
+int compute_pid(int e, int pe);
 int compute_error();
-int check_all();
+int is_line_visible();
 
 int sensors[] = {
   PD1, PD2, PD3, PD0, PD4, PD5, PD6 };
@@ -18,100 +29,78 @@ int sensors[] = {
 int weitgts[] = {
   -3, -2, -1, 0, 1, 2, 3 };
 
-int kp = 15; //30
-int ki = 1;  //1
-int kd = 1;  //0
-
 int main()
 {
-  DDRB |= _BV(PB0);
-  DDRD = 0x00;
 
+  int pid_output = 0;
+  int error = 0, prev_error = 0;
+  int left_pwm = START_PWM, right_pwm = START_PWM;
+
+  setup_sensors();
   setup_motors();
-  int error = 0;
-  int change_pwm = 0;
-  int prev_error = 0;
-  int left = START_PWM;
-  int right = START_PWM;
-  int p = 0;
-  int i = 0;
-  int d = 0;
-  //motors_straight();
+
   while(1) {
+
     error = compute_error();
-    p = error * kp;
-    d = error - prev_error;
-    i += error;
-    change_pwm = p + ki*i + kd*d;
+
     motors_straight();
-    if(error == 0){
-      //PORTB |= _BV(PB0);
-      if(check_all()){
-        OCR1A = 140;
-        OCR1B = 140;
-        //motors_straight();
+    if(error == 0) {
+
+      if(is_line_visible()){
+        OCR1A = TURN_PWM;
+        OCR1B = TURN_PWM;
       }
       else {
         if (prev_error > 0){
-          //motors_left();
           motors_right();
-          OCR1A = 140;
-          OCR1B = 140;
-          //motors_right();
+          OCR1A = TURN_PWM;
+          OCR1B = TURN_PWM;
         }
         else {
-          //motors_right();
           motors_left();
-          OCR1A = 140;
-          OCR1B = 140;
-          //motors_left();
+          OCR1A = TURN_PWM;
+          OCR1B = TURN_PWM;
         }
       }
     }
-    else {
-      PORTB &= ~_BV(PB0);
-      left = START_PWM - change_pwm;
-      right = START_PWM + change_pwm;
-      if(left > 255){
-        right = right + 255 - left;
-        if(right<0) right = 0;
-        left = 255;
-      }
-      if(right > 255){
-        left = left + 255 - right;
-        if(left<0) left = 0;
-        right = 255;
-      }
-      OCR1A = right; //zmieniona predkosc podana na silniki
-      OCR1B = left; 
-    }
-    if (check_all()) prev_error = error;
-      /*if(!((PIND & _BV(PD3)) && (PIND & _BV(PD4)))){
-        if(PIND & _BV(PD3)){
-          OCR1A=240;
-          OCR1B=160;
-        }
-          // motors_left();
 
-        if(PIND & _BV(PD4)){
-          OCR1A=160;
-          OCR1B=240;
-          // motors_right();
-        }
+    else {
+
+      pid_output = compute_pid(error, prev_error);
+
+      left_pwm = START_PWM - pid_output;
+      right_pwm = START_PWM + pid_output;
+
+      if(left_pwm > MAX_PWM){
+        right_pwm += MAX_PWM - left_pwm;
+        if(right_pwm < 0)
+          right_pwm = 0;
+        left_pwm = MAX_PWM;
       }
-      if(PIND & _BV(PD1))
-          motors_left();
-      if(PIND & _BV(PD6))
-          motors_right();
-    }*/
-    
+
+      if(right_pwm > MAX_PWM){
+        left_pwm = left_pwm + MAX_PWM - right_pwm;
+        if(left_pwm<0) left_pwm = 0;
+        right_pwm = MAX_PWM;
+      }
+
+      OCR1A = right_pwm;
+      OCR1B = left_pwm;
+
+    }
+
+    if (is_line_visible()) prev_error = error;
+
     _delay_ms(2);
 
   }
 }
 
-
-int check_all() {
+/**
+ * Zwraca 1 jesli przynajmniej jeden czujnik wykrywa trase
+ * W przeciwnym razie 0
+ **/
+int is_line_visible() {
   int i;
   for(i = 0; i < SENSORS; i++) {
     if(PIND & _BV(sensors[i]))
@@ -121,6 +110,10 @@ int check_all() {
 }
 
 
+/**
+ * Zwraca błąd obliczony na podstawie tablicy wag czujników
+ * (Im bardziej skrajny czujnik tym większa waga)
+ **/
 int compute_error() {
 
   int error = 0;
@@ -133,9 +126,26 @@ int compute_error() {
   return error;
 }
 
+/**
+ * Zwraca sumaryczną korektę ustaloną przez kontroler PID
+ * (wagi członów to odpowiednio K_P, K_I i K_D)
+ **/
+int compute_pid(int e, int pe) {
+    int p,d;
+    static int i;
+    p = e;
+    i += e;
+    d = e - pe;
+    return (K_P * p) + (K_I * i) + (K_D * d);
+}
+
+/**
+ * Ustawia piny odpowiedzialne za obsługę mostka H
+ * (w tym także ustawienie timera 1 w tryb Fast PWM)
+ **/
 void setup_motors() {
 
-  DDRC |= _BV(PC0);//ustawienie jako wyjscie pinow "silnikowych"
+  DDRC |= _BV(PC0);
   DDRC |= _BV(PC1);
   DDRC |= _BV(PC2);
   DDRC |= _BV(PC3);
@@ -150,33 +160,50 @@ void setup_motors() {
 
 }
 
+/**
+ * Ustawia port do którego przyłączone są sygnały z czujników
+ * jako wejściowy
+ **/
+void setup_sensors() {
+
+  DDRD = 0x00;
+
+}
+
+/**
+ * Ustawia sygnały na pinach sterujących kierunkiem silników
+ * tak, aby robot skręcił w lewo
+ **/
 void motors_left() {
 
-  PORTC &= ~_BV(PC0); //silnik ustawiony w tryb jazdy (0,1)
+  PORTC &= ~_BV(PC0);
   PORTC |= _BV(PC1);
-
-  PORTC |= _BV(PC2); //silnik w trybie stopu(0,0)
+  PORTC |= _BV(PC2);
   PORTC &= ~_BV(PC3);
 
 }
 
+/**
+ * Ustawia sygnały na pinach sterujących kierunkiem silników
+ * tak, aby robot skręcił w prawo
+ **/
 void motors_right() {
 
-  PORTC |= _BV(PC0);//silnik w trybie stopu(0,0)
+  PORTC |= _BV(PC0);
   PORTC &= ~_BV(PC1);
-
-  PORTC &= ~_BV(PC2);//silnik w trybie jazdy(0,1)
+  PORTC &= ~_BV(PC2);
   PORTC |= _BV(PC3);
 }
 
+/**
+ * Ustawia sygnały na pinach sterujących kierunkiem silników
+ * tak, aby robot jechał prosto
+ **/
 void motors_straight() {
 
-  PORTC &= ~_BV(PC0);//oba silniki "w przod"
+  PORTC &= ~_BV(PC0);
   PORTC |= _BV(PC1);
-  
   PORTC &= ~_BV(PC2);
   PORTC |= _BV(PC3);
 
-  OCR1A = START_PWM; //predkosc
-  OCR1B = START_PWM;
 }
