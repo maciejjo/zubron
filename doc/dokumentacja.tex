@@ -9,6 +9,23 @@
 \geometry{lmargin=2cm, top=3cm}
 \usepackage{longtable}
 \usepackage{tabularx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
 
 \author{Architektura Systemów Komputerowych}
 \title{Dokumentacja robota typu line follower}
@@ -189,7 +206,7 @@ Cechy płytki głównej
   \end{itemize}
 
   \begin{figure}[H]
-  \includegraphics[scale=0.38]{schemat_czujniki}
+  \includegraphics[scale=0.38, angle=180]{schemat_czujniki}
   \caption{Schemat płytki czujnikowej}
 \end{figure}
 
@@ -221,6 +238,8 @@ nania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, 
    Pozostałe dwa warianty: wykrywanie przez wszystkie czujniki linii (skrzyżowanie 90 stopni) oraz stan wysoki jedynie na wyjściu środkowego transoptora skutkują podaniem na oba silniki równej wartości PWM.
 
   \subsection{Kod źródłowy}
+  \lstinputlisting[caption=Kod, style=customc]{ex1.c}
+  
   \subsection{Inicjalizacja} (procedury uruchomieniowe, narzędzia i metody, innych danych doty-
 czących wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego,
 ...).
