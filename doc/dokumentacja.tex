@@ -203,7 +203,8 @@ wybranego mikrokontrolera, otoczenie mikrokontrolera, innych danych dotyczących
 nania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).
   Robotem steruje mikrokontroler ATmega8. Zasilany napięciem 5V, posiada 28 wyprowadzeń, których większość może pełnić różne role takie jak: wyjścia/wejścia cyfrowe, wejścia sygnałów przerwań, lub wejścia przetwornika ADC.
   Mikrokontroler taktowany jest zewnętrznym oscylatorem kwarcowym o wartości 16MHz.
-  
+  Do pinów 0-6(pin PD7 jest wolny) na porcie D, podłączone są wyjścia komparatorów. Piny od PC0 do PC3 służą do przyłączenia wyjść mostka H.
+  Na pinach PB6-PB7 podłączony jest zewnętrzny oscylator.
    
 \begin{figure}[H]
   \includegraphics[scale=1]{atmega8}
@@ -212,12 +213,14 @@ nania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, 
 
 \section{Oprogramowanie}
   \subsection{Algorytm}
-  Algorytm sterujący robotem został napisany w języku C. Następnie kod algorytmu został skompilowany w AVR-GCC. Kompilator ten wydany przez firmę ATMEL. Skompilowany program wgrano na mikrokontroler używając programu AVRDUDE. Mikrokontroler jest połączony z wejściem USB komputera za pomocą programatora USB-ASP. 
-  Bazą algorytmu jest sterownik PID (człon proporcjonalno całkująco różniczkujący). Dodatkowymi usprawnieniami jest zawracanie po zgubieniu trasy. Program opierra się na głównej pętli w której w pierwszym kroku ssprawdzany jest stan czujników i jeśli wykrywają one linię, to uruchamiany jest algorytm PID, w przeciwnym razie uruchamiana jest procedura odpowiedzialna za powrót na trasę, Odbywa się to poprzez zapamiętanie stanu czujników z poprzedniego odczytu, co dostarcza informacji o prawidłowym kierunku powrotu.
+  Algorytm sterujący robotem został napisany w języku C. Następnie kod algorytmu został skompilowany w AVR-GCC. Kompilator ten został wydany przez firmę ATMEL. Skompilowany program wgrano na mikrokontroler używając programu AVRDUDE. Mikrokontroler jest połączony z wejściem USB komputera za pomocą programatora USB-ASP. 
+  Bazą algorytmu jest sterownik PID (człon proporcjonalno całkująco różniczkujący). Każdemu czujnikowi przypisana jest waga (odpowiednio -3,-2,-1,0-1,2,3). Suma wag czujników, aktualnie wykrywających linię sumowana jest do zmiennej ERROR.
+   Program opiera się na głównej pętli w której w pierwszym kroku sprawdzany jest stan czujników (obliczany jest ERROR).
+   Jeśli ERROR jest różny od zera to uruchamiany jest algorytm PID. W przeciwnym razie (ERROR=0) możliwe są trzy warianty.
+   Jeżeli żaden z czujników nie wykrywa trasy uruchamiana jest procedura odpowiedzialna za powrót na trasę. Odbywa się to poprzez zapamiętanie stanu czujników z poprzedniego odczytu, co dostarcza informacji o prawidłowym kierunku powrotu.
+   Pozostałe dwa warianty: wykrywanie przez wszystkie czujniki linii (skrzyżowanie 90 stopni) oraz stan wysoki jedynie na wyjściu środkowego transoptora skutkują podaniem na oba silniki równej wartości PWM.
 
   \subsection{Kod źródłowy}
-//z komentarzami, każda linijka numerowana
-  Program został zaimplementowany w języku C. Piny PB1-PB2 (sygnał PWM dla serwomechanizmów) oraz PD0-PD4 (diody sygnalizujące stan czujników) zostały ustawione jako wyjściowe, natomiast piny PC1-PC5 (ADC1-ADC5, odczyt stanu czujników) oraz pin PB0 (przycisk uruchamiający) jako piny wejściowe. Odczyt czujników koloru polega na odczycie stanów na pinach PC1-PC5 mikrokontrolera.
   \subsection{Inicjalizacja} (procedury uruchomieniowe, narzędzia i metody, innych danych doty-
 czących wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego,
 ...).
@@ -336,8 +339,7 @@ Przednie koło zwane dalej casterem zostało
 
 \section{Uwagi końcowe}
 
- (powtórzenie najistotniejszych wniosków i uwag ze wskazaniem kie-
-runków poprawy konstrukcji robota).
+ (powtórzenie najistotniejszych wniosków i uwag ze wskazaniem kierunków poprawy konstrukcji robota).
 
 \section{Spisy}
 \subsection{Spis rysunków i tabel} 
