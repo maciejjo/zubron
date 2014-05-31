@@ -27,7 +27,6 @@
 *.bbl
 *.fdb_latexmk
 *.docx
-*.pdf
 *~
 *.bin
 *.hex
