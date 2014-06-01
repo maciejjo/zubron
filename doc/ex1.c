@@ -111,7 +111,7 @@ int is_line_visible() {
 
 
 /**
- * Zwraca błąd obliczony na podstawie tablicy wag czujników
+ * Zwraca blad obliczony na podstawie tablicy wag czujnikow
  * (Im bardziej skrajny czujnik tym większa waga)
  **/
 int compute_error() {
@@ -127,8 +127,8 @@ int compute_error() {
 }
 
 /**
- * Zwraca sumaryczną korektę ustaloną przez kontroler PID
- * (wagi członów to odpowiednio K_P, K_I i K_D)
+ * Zwraca sumaryczna korekte ustalona przez kontroler PID
+ * (wagi czlonow to odpowiednio K_P, K_I i K_D)
  **/
 int compute_pid(int e, int pe) {
     int p,d;
@@ -140,8 +140,8 @@ int compute_pid(int e, int pe) {
 }
 
 /**
- * Ustawia piny odpowiedzialne za obsługę mostka H
- * (w tym także ustawienie timera 1 w tryb Fast PWM)
+ * Ustawia piny odpowiedzialne za obsluge mostka H
+ * (w tym takze ustawienie timera 1 w tryb Fast PWM)
  **/
 void setup_motors() {
 
@@ -161,8 +161,8 @@ void setup_motors() {
 }
 
 /**
- * Ustawia port do którego przyłączone są sygnały z czujników
- * jako wejściowy
+ * Ustawia port do ktorego przylaczone sa sygnaly z czujnikow
+ * jako wejsciowy
  **/
 void setup_sensors() {
 
@@ -171,8 +171,8 @@ void setup_sensors() {
 }
 
 /**
- * Ustawia sygnały na pinach sterujących kierunkiem silników
- * tak, aby robot skręcił w lewo
+ * Ustawia sygnaly na pinach sterujacych kierunkiem silnikow
+ * tak, aby robot skrecil w lewo
  **/
 void motors_left() {
 
@@ -184,8 +184,8 @@ void motors_left() {
 }
 
 /**
- * Ustawia sygnały na pinach sterujących kierunkiem silników
- * tak, aby robot skręcił w prawo
+ * Ustawia sygnaly na pinach sterujacych kierunkiem silnikow
+ * tak, aby robot skrecil w prawo
  **/
 void motors_right() {
 
@@ -196,8 +196,8 @@ void motors_right() {
 }
 
 /**
- * Ustawia sygnały na pinach sterujących kierunkiem silników
- * tak, aby robot jechał prosto
+ * Ustawia sygnaly na pinach sterujacych kierunkiem silnikow
+ * tak, aby robot jechal prosto
  **/
 void motors_straight() {
 
