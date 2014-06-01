@@ -38,9 +38,7 @@
 \listfiles
 \begin{document}
 
-\vspace{3cm}
 \maketitle
-\vspace{2cm}
 
 \begin{center}
 \begin{tabularx}{\linewidth}{rl}
@@ -62,6 +60,8 @@
   \hline
 \end{tabularx} 
 \end{center} %end czlonkowie
+\vspace{1.5cm}
+\includegraphics[scale=0.48]{zubron_main}
 
 \newpage
 \tableofcontents
@@ -109,7 +109,6 @@ Mikrokontroler steruje pracą silników za pomocą mostka H. Robot posiada jedno
   Układ jezdny składa się z części napędowej i mechanicznej. Część napędową tworzą dwa silniki 12V. Silniki umieszczono w tylnej części robota, mocując je za pomocą aluminiowych kątowników o wymiarach 30x60mm. W kątownikach nawiercono na środku otwory montownicze zgodne z notą katalogową silników.
   
   Część mechaniczna składa się z dwóch elementów. Pierwszym są plastikowo-gumowe koła o wymiarach 43x28mm, pochodzące z zestawu klocków LEGO. Koła są zamontowane na silnikach za pomocą kleju na ciepło.
-  e
 Drugim elementem układu jezdnego jest zamocowane w przedniej części koło kastora, które zostało wykonane na tokarce w celu zmniejszenia kosztów projektu. Zapewnia ono stabilność oraz poziomuje konstrukcję, zmniejsza tarcie i zwiększa zwrotność robota. Dzięki temu zmniejszono także zużycie energii. Wypoziomowanie konstrukcji uzyskano umieszczając pomiędzy kołem kastora, a płytką drewniany klocek.
 
 \section{Elektrotechnika}
@@ -243,6 +242,7 @@ Niestety podczas wytrawiania napotkano kolejny problem, mianowicie należało wy
   \includegraphics[scale=1]{atmega8}
   \caption{Schemat mikrokontrolera}
 \end{figure}
+  Wybraliśmy mikrokontroler Atmega8 z kilku powodów: głównym było wcześniejsze doświadczenie z pokrewnymi układami i związanymi z nim narzędziami programistycznymi. Przemawiało za nim także posiadanie przez nas programatora oraz niska cena układu. Atmega8 spełnia także wszystkie założone przez nas wymagania: ma odpowiednią ilość wyprowadzeń oraz timer który można skonfigurować w trybie PWM.
 
 \section{Oprogramowanie}
   \subsection{Algorytm}
@@ -416,13 +416,16 @@ Lista narzędzi:
 Wyżej wymienione narzędzia umożliwiły zamocowanie, unieruchomienie podzespołów na płytkach pcb oraz stworzenie zwartej konstrukcji robota. Ponadto umożliwiły m.in. wiercenie, szlifowanie, matowienie powierzchni, przygotowanie elementów konstrukcyjnych własnej roboty takich jak dystanser przedniego koła w celu wypoziomowania konstrukcji.
 
 \section{Uwagi końcowe}
-
- (powtórzenie najistotniejszych wniosków i uwag ze wskazaniem kierunków poprawy konstrukcji robota).
+W kwestii elementów, które można by poprawić, należy wymienić:
+\begin{itemize}
+  \item użycie programu CAD do zaprojektowania robota
+  \item wzmocnienie konstrukcji, gdyż zauważono wyginanie się płytki spowodowane wagą silników
+  \item zminiaturyzowanie układu elektronicznego
+\end{itemize}
 
 \section{Spisy}
 \subsection{Spis rysunków i tabel} 
 \listoffigures
-\listoftables
 
 \subsection{Spis zawartości DVD} 
 (DTR w doc, katalogi elementów elektroniki,
@@ -435,6 +438,18 @@ czego teczka dotyczy (widoczna pierwsza strona DTR). Na końcu zamocowany w kope
 pierowej DVD (podpisany). 
 
 \section{Literatura}
-Literatura pomocna przy tworzeniu robota.
+Literatura pomocna przy tworzeniu robota:
+\begin{itemize}
+  \item "Język C dla mikrokontrolerów AVR. Od podstaw do zaawansowanych aplikacji". Tomasz Francuz.
+\end{itemize}
+
+Linki do not katalogowych:
+\begin{itemize}
+  \item \href{http://www.vishay.com/docs/83751/cny70.pdf}{CNY70}
+  \item \href{http://www.atmel.com/images/atmel-2486-8-bit-avr-microcontroller-atmega8_l_datasheet.pdf}{Atmega8}
+  \item \href{http://www.micromotorssrl.com/motor_hl149/HL149.pdf}{Silniki}
+  \item \href{http://www.ti.com/lit/ds/symlink/l293d.pdf}{Sterownik silników}
+  \item \href{http://www.atmel.com/images/doc2558.pdf}{AVR221}
+\end{itemize}
 
 \end{document}
