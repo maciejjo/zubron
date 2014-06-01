@@ -29,14 +29,7 @@
   identifierstyle=\color{blue},
   stringstyle=\color{orange},
   inputencoding=utf8,
-    extendedchars=\true,
-    literate=%
-{æ}{{\ae}}1
-{å}{{\aa}}1
-{ø}{{\o}}1
-{Æ}{{\AE}}1
-{Å}{{\AA}}1
-{Ø}{{\O}}1
+    extendedchars=\true
 }
 
 \author{Architektura Systemów Komputerowych}
@@ -207,8 +200,13 @@ Cechy płytki głównej
 
   \begin{figure}[H]
   \includegraphics[scale=0.8]{schemat_glowna}
-  \caption{Schemat płytki głównej}
-\end{figure}
+  \caption{Schemat ideowy płytki głównej}
+  \end{figure}
+  
+  \begin{figure}[H]
+  \includegraphics[scale=1]{schemat_glowna_m}
+  \caption{Schemat montażowy płytki głównej}
+  \end{figure}
 
   Cechy płytki czujnikowej
   \begin{itemize}
@@ -219,7 +217,12 @@ Cechy płytki głównej
 
   \begin{figure}[H]
   \includegraphics[scale=0.38, angle=180]{schemat_czujniki}
-  \caption{Schemat płytki czujnikowej}
+  \caption{Schemat ideowy płytki czujnikowej}
+\end{figure}
+
+  \begin{figure}[H]
+  \includegraphics[scale=0.8]{schemat_czujniki_m}
+  \caption{Schemat montażowy płytki czujnikowej}
 \end{figure}
 
 Największym problemem podczas przygotowanie płytki było odpowiednie dobranie czasu prasowania płytki z kartką na której był wydrukowany schemat. 
@@ -227,9 +230,6 @@ Po wielu próbach udało się dobrać odpowiedni - ok 5 minut. Czas ten zapewni�
 Niestety podczas wytrawiania napotkano kolejny problem, mianowicie należało wyjąć płytkę z roztworu w odpowiednim momencie - tak, aby wytrawiła się miedź w miejscach na których nie ma tonera. Jednocześnie nie można trzymać płytki w roztworze za długo, gdyż zacznie się wytrawiać również część miedzi pod tonerem. W obawie przed nadmiernym wytrawieniem, wyjęto płytkę odrobinę za szybko. Później, podczas sprawdzania okazało się, że osobne ścieżki zwierają się ze sobą w kilku miejscach. Problem ten rozwiązano poprzez mechaniczne usunięcie miedzi śrubokrętem.
 
 \section{Mikrokontroler}
-(dobór – kryteria, analiza narzędzi uruchomieniowych,...), (opis
-wybranego mikrokontrolera, otoczenie mikrokontrolera, innych danych dotyczących wyko-
-nania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).
   Robotem steruje mikrokontroler ATmega8. Zasilany napięciem 5V, posiada 28 wyprowadzeń, których większość może pełnić różne role takie jak: wyjścia/wejścia cyfrowe, wejścia sygnałów przerwań, lub wejścia przetwornika ADC.
   Mikrokontroler taktowany jest zewnętrznym oscylatorem kwarcowym o wartości 16MHz.
   Do pinów 0-6(pin PD7 jest wolny) na porcie D, podłączone są wyjścia komparatorów. Piny od PC0 do PC3 służą do przyłączenia wyjść mostka H.
@@ -242,26 +242,27 @@ nania, problemów które rozwiązano, wariantów które odrzucono – dlaczego, 
 
 \section{Oprogramowanie}
   \subsection{Algorytm}
-  Algorytm sterujący robotem został napisany w języku C. Następnie kod algorytmu został skompilowany w AVR-GCC. Kompilator ten został wydany przez firmę ATMEL. Skompilowany program wgrano na mikrokontroler używając programu AVRDUDE. Mikrokontroler jest połączony z wejściem USB komputera za pomocą programatora USB-ASP. 
-  Bazą algorytmu jest sterownik PID (człon proporcjonalno całkująco różniczkujący). Każdemu czujnikowi przypisana jest waga (odpowiednio -3,-2,-1,0-1,2,3). Suma wag czujników, aktualnie wykrywających linię sumowana jest do zmiennej ERROR.
-   Program opiera się na głównej pętli w której w pierwszym kroku sprawdzany jest stan czujników (obliczany jest ERROR).
-   Jeśli ERROR jest różny od zera to uruchamiany jest algorytm PID. W przeciwnym razie (ERROR=0) możliwe są trzy warianty.
-   Jeżeli żaden z czujników nie wykrywa trasy uruchamiana jest procedura odpowiedzialna za powrót na trasę. Odbywa się to poprzez zapamiętanie stanu czujników z poprzedniego odczytu, co dostarcza informacji o prawidłowym kierunku powrotu.
-   Pozostałe dwa warianty: wykrywanie przez wszystkie czujniki linii (skrzyżowanie 90 stopni) oraz stan wysoki jedynie na wyjściu środkowego transoptora skutkują podaniem na oba silniki równej wartości PWM.
+  Algorytm sterujący robotem został napisany w języku C. Następnie kod algorytmu został skompilowany w AVR-GCC (kompilator wydany przez firmę ATMEL). Skompilowany program został skopiowany do pamięci mikrokontrolera przy użyciu programu avrdude. Mikrokontroler jest połączony z wejściem USB komputera za pomocą programatora USB-ASP. 
+  Bazą algorytmu jest sterownik PID (kontroler proporcjonalno całkująco różniczkujący). Każdemu czujnikowi przypisana jest waga (odpowiednio -3,-2,-1,0-1,2,3). Suma wag czujników, aktualnie wykrywających linię zapisana jest w zmiennej ERROR.
+   W głównej pętli programu w pierwszym kroku sprawdzany jest stan czujników (obliczany jest ERROR).
+   Jeśli ERROR jest różny od zera to uruchamiany jest PID. W przeciwnym razie (ERROR=0) możliwe są trzy warianty.
+   Jeżeli żaden z czujników nie wykrywa trasy uruchamiana jest procedura odpowiedzialna za powrót na trasę. Odbywa się to poprzez odczytanie zapamiętanego stanu czujników z poprzedniego odczytu, co dostarcza informacji o prawidłowym kierunku powrotu.
+   Pozostałe dwa warianty: wykrywanie przez wszystkie czujniki linii (skrzyżowanie) oraz stan wysoki jedynie na wyjściu środkowego transoptora skutkują podaniem na oba silniki równej wartości PWM.
 
   \subsection{Kod źródłowy}
   \lstinputlisting[caption=Kod, style=customc]{ex1.c}
-  
-  \subsection{Inicjalizacja} (procedury uruchomieniowe, narzędzia i metody, innych danych doty-
-czących wykonania, problemów które rozwiązano, wariantów które odrzucono – dlaczego,
-...).
-  \subsection{Sterowanie}
-  Jako algorytm sterowania robotem wykorzystano algorytm regulatora PID.
-  \subsection{Pomiar}  
-  
-\section{Serwisowania i konserwacja} (punkty pomiarowe na płytce i w konstrukcji, analiza
-FTA awarii i ich skutków, metody ich usunięcia, innych danych dotyczących wykonania, pro-
-blemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).  
+   
+\section{Serwisowania i konserwacja} 
+  Gniazdo wyjściowe płytki czujników stanowi jednocześnie punkt pomiarowy umożliwiający sprawdzenie poprawności działania czujników.
+  Serwisowalne elementy robota:
+  \begin{itemize}
+    \item silniki 
+    \item koła (wymienne ogumienie)
+    \item baterie
+    \item płytka czujników
+    \item mikrokontroler (wymienny na dowolny kompatybilny z Atmega8)
+    \item przewody łączące płytki
+  \end{itemize}
 
 \section{Inżynieria oprogramowania i metodyki prowadzenia projektu}
   \subsection{Analiza SWOT członków zespołu}
@@ -292,6 +293,11 @@ blemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).
   Adam Szczesiak & precyzyjność & brak szczegółowej wiedzy elektronicznej \\
                  & punktualność & brak zamiłowania do języka C \\
   \hline  
+  Kamil Wygralak & zamiłowanie do majsterowania & łatwość do rozkojarzania się \\
+                 & koordynacja pracy grupy & szybkie zniechęcanie się gdy coś nie idzie \\
+  \hline
+  Maciej Królikowski & umiejętność organizacji pracy & małe umiejętności manualne \\
+                     & ambicja & problemy z koncentracją \\ 
   \hline
 \end{tabular} 
 \end{center}
@@ -315,7 +321,6 @@ blemów które rozwiązano, wariantów które odrzucono – dlaczego, ...).
     \item Zakończenie projektu Według metodyki PRINCE2 projekty muszą być zamykane w sposób uporządkowany i kontrolowany. 
     Wszystkie doświadczenia zdobyte w trakcie prowadzenia projektu są rejestrowane, tworzony jest dokument przekazania i planowany jest przegląd powdrożeniowy.  
  \end{itemize}
-
   
 \newgeometry{rmargin=1cm}
 \newgeometry{lmargin=1cm}
